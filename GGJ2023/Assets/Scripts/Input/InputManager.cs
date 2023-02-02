@@ -20,6 +20,11 @@ public class InputManager : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
 
+        if (gameObject.CompareTag("Player"))
+        {
+
+        }
+
     }
     private void FixedUpdate()
     {
