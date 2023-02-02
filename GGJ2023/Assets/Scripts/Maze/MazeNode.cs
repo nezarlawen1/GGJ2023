@@ -13,6 +13,9 @@ public class MazeNode : MonoBehaviour
 {
     [SerializeField] private GameObject[] _walls;
     [SerializeField] private MeshRenderer _floormesh;
+    [SerializeField] private Vector2Int _posCords;
+
+    public Vector2Int PosCords { get => _posCords; }
 
     public void SetState(NodeState state)
     {
@@ -30,5 +33,16 @@ public class MazeNode : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void SetPosOnMatrix(int x, int y)
+    {
+        _posCords.x = x;
+        _posCords.y = y;
+    }
+
+    public void RemoveWall(int wallToRemove)
+    {
+        _walls[wallToRemove].SetActive(false);
     }
 }
