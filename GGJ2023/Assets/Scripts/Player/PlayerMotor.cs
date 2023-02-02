@@ -30,7 +30,7 @@ public class PlayerMotor : MonoBehaviour
     }
     #endregion
     #region Methods
-    public void ProcessMove(Vector2 input)
+    public void ProcessPlayerMove(Vector2 input)
     {
         moveDirection = Vector3.zero;
         moveDirection.x = input.x;
@@ -40,6 +40,14 @@ public class PlayerMotor : MonoBehaviour
         if (isGrounded && playerVelocity.y < 0)
             playerVelocity.y = -2f;
         controller.Move(playerVelocity * Time.deltaTime);
+    }
+
+    public void ProcessScoutMove(Vector2 input)
+    {
+        moveDirection = Vector3.zero;
+        moveDirection.x = input.x;
+        moveDirection.z = input.y;
+        controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
     }
     #endregion
 }
