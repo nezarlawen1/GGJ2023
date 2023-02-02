@@ -4,19 +4,8 @@ using UnityEngine;
 
 public class ControllersSwapManager : MonoBehaviour
 {
-    private ControllersSwapManager _instance;
-
-    public ControllersSwapManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new ControllersSwapManager();
-            }
-            return _instance;
-        }
-    }
+    public static ControllersSwapManager Instance;
+    
 
     public InputManager PlayerInputManager;
     public InputManager ScoutInputManager;
@@ -24,9 +13,19 @@ public class ControllersSwapManager : MonoBehaviour
     public GameObject PlayerCamera;
     public GameObject ScoutCamera;
 
+    public GameObject PlayerCanvases;
+    public GameObject ScoutCanvases;
+
     private void Awake()
     {
-        _instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -42,6 +41,8 @@ public class ControllersSwapManager : MonoBehaviour
             ScoutInputManager.OnEnable();
             PlayerCamera.SetActive(false);
             ScoutCamera.SetActive(true);
+            PlayerCanvases.SetActive(false);
+            ScoutCanvases.SetActive(true);
         }
         else
         {
@@ -49,6 +50,8 @@ public class ControllersSwapManager : MonoBehaviour
             ScoutInputManager.OnDisable();
             PlayerCamera.SetActive(true);
             ScoutCamera.SetActive(false);
+            PlayerCanvases.SetActive(true);
+            ScoutCanvases.SetActive(false);
         }
     }
 }

@@ -22,17 +22,24 @@ public class InputManager : MonoBehaviour
 
         if (gameObject.CompareTag("Player"))
         {
+            player.SwapToScout.performed += ctx => ControllersSwapManager.Instance.SwapControlToScout(true);
 
         }
 
     }
     private void FixedUpdate()
     {
-        motor.ProcessMove(player.Movement.ReadValue<Vector2>());
+        if (gameObject.CompareTag("Player"))
+            motor.ProcessPlayerMove(player.Movement.ReadValue<Vector2>());
+        else if(gameObject.CompareTag("Scout"))
+            motor.ProcessScoutMove(player.Movement.ReadValue<Vector2>());
     }
     private void LateUpdate()
     {
-        look.ProcessLook(player.Look.ReadValue<Vector2>());
+        if (gameObject.CompareTag("Player"))
+            look.ProcessPlayerLook(player.Look.ReadValue<Vector2>());
+        else if(gameObject.CompareTag("Scout"))
+            look.ProcessScoutLook(player.Look.ReadValue<Vector2>());
     }
     public void OnEnable()
     {
