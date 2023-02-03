@@ -20,6 +20,7 @@ public class MazeGenerator : MonoBehaviour
     private bool _creatingMaze;
 
     [Header("Additional Generation")]
+    [SerializeField] private CoreType _coreType;
     [SerializeField] private GameObject _portalPrefab;
     [SerializeField] private GameObject _corePrefab;
     [SerializeField] public GameObject _portalRef, _coreRef;
@@ -397,6 +398,9 @@ public class MazeGenerator : MonoBehaviour
                 {
                     GameObject endpoint = Instantiate(_corePrefab, _createdMazeNodes[i].transform.position + Vector3.up, Quaternion.identity, InteractablesHolder);
                     _coreRef = endpoint;
+                    int typeChoice = Random.Range(0, Enum.GetNames(typeof(CoreType)).Length);
+                    _coreType = (CoreType)typeChoice;
+                    _coreRef.GetComponent<Core>().SetCoreType(_coreType);
                 }
             }
         }

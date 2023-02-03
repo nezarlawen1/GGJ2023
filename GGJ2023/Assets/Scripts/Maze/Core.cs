@@ -1,14 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum CoreType
+{
+    Norori = 0,
+    Suori,
+    Austri,
+    Vestri
+}
 
 public class Core : MonoBehaviour
 {
     [SerializeField] private bool _purified;
     [SerializeField] private GameObject _purifiedObj, _unpurifiedObj;
+    [SerializeField] private CoreType _coreType;
+    [SerializeField] private List<GameObject> _corePrefabs;
     private GameObject _player;
 
-    public bool Purified { get => _purified; set => _purified = value; }
+    public bool Purified { get => _purified;}
 
 
     private void Update()
@@ -16,18 +27,32 @@ public class Core : MonoBehaviour
         PurificationLogic();
     }
 
+    public void SetCoreType(CoreType typeVal)
+    {
+        _coreType = typeVal;
+    }
 
     private void PurificationLogic()
     {
-        if (_purified)
+        if (_purified && _unpurifiedObj)
         {
             _purifiedObj.SetActive(true);
             _unpurifiedObj.SetActive(false);
         }
-        else
+        else if (!_purified && _unpurifiedObj)
         {
             _purifiedObj.SetActive(false);
             _unpurifiedObj.SetActive(true);
+        }
+
+        _unpurifiedObj = _corePrefabs[(int)_coreType];
+
+        foreach (var item in _corePrefabs)
+        {
+            if (_unpurifiedObj != item)
+            {
+                item.SetActive(false);
+            }
         }
     }
 
