@@ -7,11 +7,13 @@ public class PortalTeleporter : MonoBehaviour
     //public Transform enterPoint;
     public Transform exitPoint;
     public MazeGenerator mazeGenerator;
+    public bool open = false;
 
     private void Update()
     {
         if (exitPoint == null)
         {
+            GameManager.Instance.CurrentMaze = mazeGenerator;
             exitPoint = mazeGenerator._portalRef.transform;
         }
     }
@@ -25,6 +27,7 @@ public class PortalTeleporter : MonoBehaviour
         }
         if (other.tag == "Player")
         {
+            ControllersSwapManager.Instance.CurrentPortalPos = gameObject.transform;
             ControllersSwapManager.Instance.PlayerInPortalCollider = true;
             if (ControllersSwapManager.Instance.PlayerCanTeleport)
             {

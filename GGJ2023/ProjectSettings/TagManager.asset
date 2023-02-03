@@ -8,6 +8,7 @@ TagManager:
   - Damager
   - Enemy
   - Tree
+  - Core
   layers:
   - Default
   - TransparentFX

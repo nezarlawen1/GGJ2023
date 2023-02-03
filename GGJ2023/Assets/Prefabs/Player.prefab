@@ -310,7 +310,6 @@ GameObject:
   - component: {fileID: 7859231428527368523}
   - component: {fileID: 7859231428527368522}
   - component: {fileID: 7859231428527368528}
-  - component: {fileID: 2398689850532935346}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -453,30 +452,6 @@ MonoBehaviour:
   cam: {fileID: 7859231428406600956}
   xSensitivity: 15
   ySensitivity: 15
---- !u!114 &2398689850532935346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7859231428527368521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea4940ea202afdb4186d76f265880283, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inputManager: {fileID: 7859231428527368523}
-  FirePoint: {fileID: 3195570840762408816}
-  Projectile: {fileID: 2334144745104709251, guid: 3adb1bc94c5ae014b9a813c0aea88be6,
-    type: 3}
-  _target: {fileID: 4859297106738366736}
-  _mainCamera: {fileID: 7859231428406600956}
-  _attackRange: 20
-  _layerToHit:
-    serializedVersion: 2
-    m_Bits: 128
-  _projectileSpeed: 30
-  _cooldown: 1
 --- !u!1 &7859231428826308642
 GameObject:
   m_ObjectHideFlags: 0

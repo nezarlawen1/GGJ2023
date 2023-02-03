@@ -23,58 +23,53 @@ public class InputManager : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
 
-        if (gameObject.CompareTag("Player"))
-        {
-            /*if (ControllersSwapManager.Instance.PlayerInPortalCollider)
-            {
-                player.SwapToScout.performed += ctx => ControllersSwapManager.Instance.SwapControlToScout(true);
-            }*/
-
-            player.ShootPress.performed += ctx =>
-            {
-                if (ctx.interaction is PressInteraction)
-                {
-                    ShootPress = true;
-                }
-            };
-            player.ShootPress.canceled += ctx => ShootPress = false;
-
-            player.ShootHold.performed += ctx =>
-            {
-                if (ctx.interaction is HoldInteraction)
-                {
-                    ShootHold = true;
-                }
-            };
-            player.ShootHold.canceled += ctx => ShootHold = false;
-        }
-        else if (gameObject.CompareTag("Scout"))
-        {
-            player.RetrackHold.started += ctx =>
-            {
-                if (ctx.interaction is HoldInteraction)
-                {
-                    ControllersSwapManager.Instance.SwapControlToScout(false);
-
-                    ControllersSwapManager.Instance.PlayerCanTeleport = true;
-
-                }
-            };
-        }
+        
     }
     private void Update()
     {
-        if (gameObject.CompareTag("Player"))
+        player.SwapToScout.performed += ctx =>
         {
-            if (ControllersSwapManager.Instance.PlayerInPortalCollider)
+            if (ctx.interaction is HoldInteraction)
             {
-                player.SwapToScout.performed += ctx => ControllersSwapManager.Instance.SwapControlToScout(true);
+                if (gameObject.CompareTag("Player"))
+                {
+                    if (GameManager.Instance.CurrentMaze.IsPlayerInMaze)
+                    {
+                        gameObject.transform.position = ControllersSwapManager.Instance.CurrentPortalPos.position;
+                    }
+                    else
+                    {
+                        ControllersSwapManager.Instance.SwapControlToScout(true);
+                    }
+                }
+                else if (gameObject.CompareTag("Scout"))
+                {
+                    ControllersSwapManager.Instance.SwapControlToScout(false);
+                }
             }
-            if (ControllersSwapManager.Instance.PlayerCanTeleport)
+        };
+        player.Enteract.performed += ctx =>
+        {
+            if (ctx.interaction is PressInteraction)
             {
-
+                if (gameObject.CompareTag("Player"))
+                {
+                    //if player has the right key then enter key
+                    if (true)
+                    {
+                        ControllersSwapManager.Instance.CurrentPortalPos.gameObject.GetComponent<PortalTeleporter>().open = true;
+                    }
+                    if (ControllersSwapManager.Instance.CurrentPortalPos.gameObject.GetComponent<PortalTeleporter>().open)
+                    {
+                        ControllersSwapManager.Instance.PlayerCanTeleport = true;
+                    }
+                    if (!GameManager.Instance.CurrentCore.Purified)
+                    {
+                        GameManager.Instance.CurrentCore.PurifyCore();
+                    }
+                }
             }
-        }
+        };
     }
     private void FixedUpdate()
     {
