@@ -408,6 +408,13 @@ public class MazeGenerator : MonoBehaviour
 
     }
 
+    public void RerollType()
+    {
+        int typeChoice = Random.Range(0, Enum.GetNames(typeof(CoreType)).Length);
+        _coreType = (CoreType)typeChoice;
+        _coreRef.GetComponent<Core>().SetCoreType(_coreType);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -420,12 +427,12 @@ public class MazeGenerator : MonoBehaviour
             SwitchVision(false);
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            IsPlayerInMaze = false;
-            SwitchVision(false);
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        IsPlayerInMaze = false;
+    //        SwitchVision(false);
+    //    }
+    //}
 }

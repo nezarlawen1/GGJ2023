@@ -49,24 +49,34 @@ public class InputManager : MonoBehaviour
                 }
             }
         };
-        player.Enteract.performed += ctx =>
+        player.Enteract.started += ctx =>
         {
             if (ctx.interaction is PressInteraction)
             {
                 if (gameObject.CompareTag("Player"))
                 {
-                    //if player has the right key then enter key
-                    if (true)
+                    if (!GameManager.Instance.CurrentMaze.IsPlayerInMaze && ControllersSwapManager.Instance.CurrentPortalPos != null)
                     {
-                        ControllersSwapManager.Instance.CurrentPortalPos.gameObject.GetComponent<PortalTeleporter>().open = true;
+                        //if player has the right key then enter key
+                        if (GameManager.Instance.CurrentMaze._coreRef.GetComponent<Core>().CoreType == CubeKey.Instance.CoreType)
+                        {
+                            ControllersSwapManager.Instance.CurrentPortalPos.gameObject.GetComponent<PortalTeleporter>().open = true;
+                        }
+                        else
+                        {
+                            GameManager.Instance.CurrentMaze.RerollType();
+                        }
+                        if (ControllersSwapManager.Instance.CurrentPortalPos.gameObject.GetComponent<PortalTeleporter>().open)
+                        {
+                            ControllersSwapManager.Instance.PlayerCanTeleport = true;
+                        }
                     }
-                    if (ControllersSwapManager.Instance.CurrentPortalPos.gameObject.GetComponent<PortalTeleporter>().open)
+                    if (GameManager.Instance.CurrentCore != null)
                     {
-                        ControllersSwapManager.Instance.PlayerCanTeleport = true;
-                    }
-                    if (!GameManager.Instance.CurrentCore.Purified)
-                    {
-                        GameManager.Instance.CurrentCore.PurifyCore();
+                        if (!GameManager.Instance.CurrentCore.Purified)
+                        {
+                            GameManager.Instance.CurrentCore.PurifyCore();
+                        }
                     }
                 }
             }
