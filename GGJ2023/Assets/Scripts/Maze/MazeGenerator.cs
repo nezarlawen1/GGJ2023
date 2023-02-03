@@ -6,13 +6,21 @@ using Random = UnityEngine.Random;
 
 public class MazeGenerator : MonoBehaviour
 {
+    [Header("Base Generation")]
     [SerializeField] private MazeNode _mazeNodePrefab;
+    [SerializeField] private List<MazeNode> _createdMazeNodes;
     [SerializeField] private Vector2Int _mazeSize = new Vector2Int(5, 5);
     [SerializeField] private Vector2Int _startCord;
+    [SerializeField] private Vector2Int _endCord;
     [SerializeField] private bool _randStart;
+    [SerializeField] private bool _randEnd;
     [SerializeField] private bool _showDrawing;
     [SerializeField] private bool _createMaze = true;
     private bool _creatingMaze;
+
+    [Header("Additional Generation")]
+    [SerializeField] private GameObject _portalPrefab;
+    [SerializeField] private GameObject _corePrefab;
 
 
     private void Start()
@@ -35,6 +43,7 @@ public class MazeGenerator : MonoBehaviour
             {
                 Destroy(transform.GetChild(i).gameObject);
             }
+            _createdMazeNodes.Clear();
             StartCoroutine(GenerateMaze(_mazeSize));
         }
         else if (!_showDrawing && _createMaze && !_creatingMaze)
@@ -45,7 +54,9 @@ public class MazeGenerator : MonoBehaviour
             {
                 Destroy(transform.GetChild(i).gameObject);
             }
+            _createdMazeNodes.Clear();
             GenerateMazeInstantaneously(_mazeSize);
+            GenerateAdditions();
         }
     }
 
@@ -62,6 +73,7 @@ public class MazeGenerator : MonoBehaviour
                 MazeNode newNode = Instantiate(_mazeNodePrefab, nodePos, Quaternion.identity, transform);
                 newNode.SetPosOnMatrix(x, y);
                 nodes.Add(newNode);
+                _createdMazeNodes.Add(newNode);
             }
         }
 
@@ -71,7 +83,9 @@ public class MazeGenerator : MonoBehaviour
         // Choose Starting Node
         if (_randStart)
         {
-            currentPath.Add(nodes[Random.Range(0, nodes.Count)]);
+            MazeNode tempStartNode = nodes[Random.Range(0, nodes.Count)];
+            currentPath.Add(tempStartNode);
+            _startCord.Set(tempStartNode.PosCords.x, tempStartNode.PosCords.y);
         }
         else
         {
@@ -193,6 +207,7 @@ public class MazeGenerator : MonoBehaviour
                 MazeNode newNode = Instantiate(_mazeNodePrefab, nodePos, Quaternion.identity, transform);
                 newNode.SetPosOnMatrix(x, y);
                 nodes.Add(newNode);
+                _createdMazeNodes.Add(newNode);
 
                 yield return null;
             }
@@ -316,6 +331,33 @@ public class MazeGenerator : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
 
+        GenerateAdditions();
         _creatingMaze = false;
+    }
+
+    private void GenerateAdditions()
+    {
+        if (_portalPrefab && _corePrefab)
+        {
+            if (_randEnd)
+            {
+                MazeNode tempStartNode = _createdMazeNodes[Random.Range(0, _createdMazeNodes.Count)];
+                _endCord.Set(tempStartNode.PosCords.x, tempStartNode.PosCords.y);
+            }
+
+            for (int i = 0; i < _createdMazeNodes.Count; i++)
+            {
+                if (_createdMazeNodes[i].PosCords.x == _startCord.x && _createdMazeNodes[i].PosCords.y == _startCord.y)
+                {
+                    GameObject entrance = Instantiate(_portalPrefab, _createdMazeNodes[i].transform.position, Quaternion.identity, _createdMazeNodes[i].transform);
+                }
+
+                if (_createdMazeNodes[i].PosCords.x == _endCord.x && _createdMazeNodes[i].PosCords.y == _endCord.y)
+                {
+                    GameObject endpoint = Instantiate(_corePrefab, _createdMazeNodes[i].transform.position, Quaternion.identity, _createdMazeNodes[i].transform);
+                }
+            }
+        }
+
     }
 }

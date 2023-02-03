@@ -316,7 +316,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1876005259}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 5, y: 15, z: 5}
+  m_LocalPosition: {x: 2, y: 10, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -423,5 +423,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5565271900957925223, guid: 1372975fe22f4f941ac1c6a3b70b68ae,
+        type: 3}
+      propertyPath: _endCord.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565271900957925223, guid: 1372975fe22f4f941ac1c6a3b70b68ae,
+        type: 3}
+      propertyPath: _endCord.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565271900957925223, guid: 1372975fe22f4f941ac1c6a3b70b68ae,
+        type: 3}
+      propertyPath: _corePrefab
+      value: 
+      objectReference: {fileID: 6659177564634505693, guid: d9ea8a0230912ad48a5f66d941787a19,
+        type: 3}
+    - target: {fileID: 5565271900957925223, guid: 1372975fe22f4f941ac1c6a3b70b68ae,
+        type: 3}
+      propertyPath: _portalPrefab
+      value: 
+      objectReference: {fileID: 622469284623515221, guid: 2c4fabbeefc00d54a8faf839d31f6d9e,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1372975fe22f4f941ac1c6a3b70b68ae, type: 3}
