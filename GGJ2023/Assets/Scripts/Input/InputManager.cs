@@ -78,6 +78,7 @@ public class InputManager : MonoBehaviour
                         if (!GameManager.Instance.CurrentCore.Purified)
                         {
                             GameManager.Instance.CurrentCore.PurifyCore();
+                            GameManager.Instance.CurrentMaze.SwitchVision(false);
                         }
                     }
                 }
