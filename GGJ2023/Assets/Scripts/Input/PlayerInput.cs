@@ -51,7 +51,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""id"": ""74104f9d-8b17-4c28-a4c7-7f7ed9f5518a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=0.3,pressPoint=0.4)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -70,6 +70,24 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold(duration=0.3,pressPoint=0.4)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Enteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8e35c1d-3ac4-42af-a62d-b4f6300e10f6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(pressPoint=0.2,behavior=2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CycleKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a273fd0-bc3f-4556-a950-211505d925cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 }
             ],
@@ -143,7 +161,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cb1c7117-db8a-40b5-9077-f3f44df12104"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -172,6 +190,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""ShootHold"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""718318d9-382f-41f6-9ded-b1ce639a0db3"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Enteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a3021bd-57e7-4232-bd4e-87bdf0cea8d7"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +225,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_SwapToScout = m_Player.FindAction("SwapToScout", throwIfNotFound: true);
         m_Player_ShootPress = m_Player.FindAction("ShootPress", throwIfNotFound: true);
         m_Player_ShootHold = m_Player.FindAction("ShootHold", throwIfNotFound: true);
+        m_Player_Enteract = m_Player.FindAction("Enteract", throwIfNotFound: true);
+        m_Player_CycleKey = m_Player.FindAction("CycleKey", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,6 +291,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SwapToScout;
     private readonly InputAction m_Player_ShootPress;
     private readonly InputAction m_Player_ShootHold;
+    private readonly InputAction m_Player_Enteract;
+    private readonly InputAction m_Player_CycleKey;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -258,6 +302,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @SwapToScout => m_Wrapper.m_Player_SwapToScout;
         public InputAction @ShootPress => m_Wrapper.m_Player_ShootPress;
         public InputAction @ShootHold => m_Wrapper.m_Player_ShootHold;
+        public InputAction @Enteract => m_Wrapper.m_Player_Enteract;
+        public InputAction @CycleKey => m_Wrapper.m_Player_CycleKey;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -282,6 +328,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ShootHold.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootHold;
                 @ShootHold.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootHold;
                 @ShootHold.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootHold;
+                @Enteract.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnteract;
+                @Enteract.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnteract;
+                @Enteract.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnteract;
+                @CycleKey.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCycleKey;
+                @CycleKey.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCycleKey;
+                @CycleKey.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCycleKey;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -301,6 +353,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ShootHold.started += instance.OnShootHold;
                 @ShootHold.performed += instance.OnShootHold;
                 @ShootHold.canceled += instance.OnShootHold;
+                @Enteract.started += instance.OnEnteract;
+                @Enteract.performed += instance.OnEnteract;
+                @Enteract.canceled += instance.OnEnteract;
+                @CycleKey.started += instance.OnCycleKey;
+                @CycleKey.performed += instance.OnCycleKey;
+                @CycleKey.canceled += instance.OnCycleKey;
             }
         }
     }
@@ -312,5 +370,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnSwapToScout(InputAction.CallbackContext context);
         void OnShootPress(InputAction.CallbackContext context);
         void OnShootHold(InputAction.CallbackContext context);
+        void OnEnteract(InputAction.CallbackContext context);
+        void OnCycleKey(InputAction.CallbackContext context);
     }
 }

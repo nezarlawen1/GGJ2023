@@ -23,41 +23,67 @@ public class InputManager : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
 
-        if (gameObject.CompareTag("Player"))
+        player.CycleKey.performed += ctx => CubeKey.Instance.NextCoreType();
+
+    }
+    private void Update()
+    {
+        player.SwapToScout.performed += ctx =>
         {
-            player.SwapToScout.performed += ctx => ControllersSwapManager.Instance.SwapControlToScout(true);
-
-            player.ShootPress.performed += ctx =>
+            if (ctx.interaction is HoldInteraction)
             {
-                if (ctx.interaction is PressInteraction)
+                if (gameObject.CompareTag("Player"))
                 {
-                    ShootPress = true;
+                    if (GameManager.Instance.CurrentMaze.IsPlayerInMaze)
+                    {
+                        gameObject.transform.position = ControllersSwapManager.Instance.CurrentPortalPos.position;
+                    }
+                    else
+                    {
+                        ControllersSwapManager.Instance.SwapControlToScout(true);
+                    }
                 }
-            };
-            player.ShootPress.canceled += ctx => ShootPress = false;
-
-            player.ShootHold.performed += ctx =>
+                else if (gameObject.CompareTag("Scout"))
+                {
+                    ControllersSwapManager.Instance.SwapControlToScout(false);
+                }
+            }
+        };
+        player.Enteract.performed += ctx =>
+        {
+            if (ctx.interaction is PressInteraction)
             {
-                if (ctx.interaction is HoldInteraction)
+                if (gameObject.CompareTag("Player"))
                 {
-                    ShootHold = true;
+                    //if player has the right key then enter key
+                    if (true)
+                    {
+                        ControllersSwapManager.Instance.CurrentPortalPos.gameObject.GetComponent<PortalTeleporter>().open = true;
+                    }
+                    if (ControllersSwapManager.Instance.CurrentPortalPos.gameObject.GetComponent<PortalTeleporter>().open)
+                    {
+                        ControllersSwapManager.Instance.PlayerCanTeleport = true;
+                    }
+                    if (!GameManager.Instance.CurrentCore.Purified)
+                    {
+                        GameManager.Instance.CurrentCore.PurifyCore();
+                    }
                 }
-            };
-            player.ShootHold.canceled += ctx => ShootHold = false;
-        }
+            }
+        };
     }
     private void FixedUpdate()
     {
         if (gameObject.CompareTag("Player"))
             motor.ProcessPlayerMove(player.Movement.ReadValue<Vector2>());
-        else if(gameObject.CompareTag("Scout"))
+        else if (gameObject.CompareTag("Scout"))
             motor.ProcessScoutMove(player.Movement.ReadValue<Vector2>());
     }
     private void LateUpdate()
     {
         if (gameObject.CompareTag("Player"))
             look.ProcessPlayerLook(player.Look.ReadValue<Vector2>());
-        else if(gameObject.CompareTag("Scout"))
+        else if (gameObject.CompareTag("Scout"))
             look.ProcessScoutLook(player.Look.ReadValue<Vector2>());
     }
     public void OnEnable()

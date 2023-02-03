@@ -5,7 +5,6 @@ using UnityEngine;
 public class ControllersSwapManager : MonoBehaviour
 {
     public static ControllersSwapManager Instance;
-    
 
     public InputManager PlayerInputManager;
     public InputManager ScoutInputManager;
@@ -15,6 +14,13 @@ public class ControllersSwapManager : MonoBehaviour
 
     public GameObject PlayerCanvases;
     public GameObject ScoutCanvases;
+
+    public GameObject ScoutRef;
+    public Transform ScoutFirstPos;
+    public Transform CurrentPortalPos;
+
+    public bool PlayerInPortalCollider = false;
+    public bool PlayerCanTeleport = false;
 
     private void Awake()
     {
@@ -30,22 +36,27 @@ public class ControllersSwapManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       SwapControlToScout(false);
+        ScoutFirstPos = ScoutRef.transform;
+        SwapControlToScout(false);
     }
 
     public void SwapControlToScout(bool state)
     {
         if (state)
         {
+            ScoutFirstPos = ScoutRef.transform;
             PlayerInputManager.OnDisable();
             ScoutInputManager.OnEnable();
             PlayerCamera.SetActive(false);
             ScoutCamera.SetActive(true);
             PlayerCanvases.SetActive(false);
             ScoutCanvases.SetActive(true);
+            ScoutRef.SetActive(true);
         }
         else
         {
+            ScoutRef.transform.position = ScoutFirstPos.position;
+            ScoutRef.SetActive(false);
             PlayerInputManager.OnEnable();
             ScoutInputManager.OnDisable();
             PlayerCamera.SetActive(true);

@@ -29,7 +29,7 @@
                     "id": "74104f9d-8b17-4c28-a4c7-7f7ed9f5518a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold(duration=0.3,pressPoint=0.4)",
                     "initialStateCheck": false
                 },
                 {
@@ -48,6 +48,24 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold(duration=0.3,pressPoint=0.4)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Enteract",
+                    "type": "Button",
+                    "id": "b8e35c1d-3ac4-42af-a62d-b4f6300e10f6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(pressPoint=0.2,behavior=2)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CycleKey",
+                    "type": "Button",
+                    "id": "5a273fd0-bc3f-4556-a950-211505d925cd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -121,7 +139,7 @@
                 {
                     "name": "",
                     "id": "cb1c7117-db8a-40b5-9077-f3f44df12104",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -148,6 +166,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ShootHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "718318d9-382f-41f6-9ded-b1ce639a0db3",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Enteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a3021bd-57e7-4232-bd4e-87bdf0cea8d7",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CycleKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

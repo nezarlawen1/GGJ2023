@@ -9,6 +9,8 @@ public class EnemyAI : MonoBehaviour
     public LayerMask GroundLayer, PlayerLayer;
     public NavMeshAgent Agent;
     public Transform Player;
+    public GameObject HandCollider;
+    public HealthHandler HealthHandlerRef;
 
     // Patroling
     public bool CanChase = true;
@@ -23,7 +25,13 @@ public class EnemyAI : MonoBehaviour
     private void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
-        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        Player = GameObject.FindGameObjectWithTag("Tree").transform;
+        HealthHandlerRef.OnDeath += HealthHandlerRef_OnDeath;
+    }
+
+    private void HealthHandlerRef_OnDeath(object sender, System.EventArgs e)
+    {
+        EnemyDeath();
     }
 
     void Update()
@@ -60,6 +68,7 @@ public class EnemyAI : MonoBehaviour
     {
         //Debug.Log("Reseting");
         yield return new WaitForSeconds(attackCoolDown);
+        HandCollider.SetActive(false);
         boolToReset();
         //Debug.Log("Done");
     }
@@ -81,12 +90,17 @@ public class EnemyAI : MonoBehaviour
         if (!AlreadyAttacked)
         {
             //Attack code here
-            //attack
+            HandCollider.SetActive(true);
             //End of attack code
 
             AlreadyAttacked = true;
             StartCoroutine(ResetAttack(AttackCoolDownTime, delegate () { AlreadyAttacked = false; }));
         }
 
+    }
+
+    private void EnemyDeath()
+    {
+        Destroy(gameObject);
     }
 }

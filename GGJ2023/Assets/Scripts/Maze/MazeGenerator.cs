@@ -8,6 +8,7 @@ public class MazeGenerator : MonoBehaviour
 {
     [Header("Base Generation")]
     [SerializeField] private MazeNode _mazeNodePrefab;
+    [SerializeField] private Transform _nodesHolder, InteractablesHolder;
     [SerializeField] private List<MazeNode> _createdMazeNodes;
     [SerializeField] private Vector2Int _mazeSize = new Vector2Int(5, 5);
     [SerializeField] private Vector2Int _startCord;
@@ -19,11 +20,19 @@ public class MazeGenerator : MonoBehaviour
     private bool _creatingMaze;
 
     [Header("Additional Generation")]
+    [SerializeField] private CoreType _coreType;
     [SerializeField] private GameObject _portalPrefab;
     [SerializeField] private GameObject _corePrefab;
+    [SerializeField] public GameObject _portalRef, _coreRef;
     [SerializeField] private bool _darkVision;
-    [SerializeField] private bool _chanegedVision;
+    [SerializeField] private bool _changedVision;
+    private BoxCollider _mazeCollider;
 
+    public bool IsPlayerInMaze;
+    private void Awake()
+    {
+        _mazeCollider = GetComponent<BoxCollider>();
+    }
 
     private void Start()
     {
@@ -33,7 +42,10 @@ public class MazeGenerator : MonoBehaviour
     private void Update()
     {
         DrawMaze();
-        SetNodeColors();
+        if (_changedVision)
+        {
+            SetNodeColors();
+        }
     }
 
     private void DrawMaze()
@@ -42,9 +54,13 @@ public class MazeGenerator : MonoBehaviour
         {
             _createMaze = false;
             _creatingMaze = true;
-            for (int i = 0; i < transform.childCount; i++)
+            for (int i = 0; i < _nodesHolder.childCount; i++)
             {
-                Destroy(transform.GetChild(i).gameObject);
+                Destroy(_nodesHolder.GetChild(i).gameObject);
+            }
+            for (int i = 0; i < InteractablesHolder.childCount; i++)
+            {
+                Destroy(InteractablesHolder.GetChild(i).gameObject);
             }
             _createdMazeNodes.Clear();
             StartCoroutine(GenerateMaze(_mazeSize));
@@ -53,40 +69,36 @@ public class MazeGenerator : MonoBehaviour
         {
             _createMaze = false;
             _creatingMaze = true;
-            for (int i = 0; i < transform.childCount; i++)
+            for (int i = 0; i < _nodesHolder.childCount; i++)
             {
-                Destroy(transform.GetChild(i).gameObject);
+                Destroy(_nodesHolder.GetChild(i).gameObject);
+            }
+            for (int i = 0; i < InteractablesHolder.childCount; i++)
+            {
+                Destroy(InteractablesHolder.GetChild(i).gameObject);
             }
             _createdMazeNodes.Clear();
             GenerateMazeInstantaneously(_mazeSize);
             GenerateAdditions();
         }
+
+        _mazeCollider.center = new Vector3(_mazeSize.x * 2, _mazeNodePrefab.transform.localScale.y / 2, _mazeSize.y * 2);
+        _mazeCollider.size = new Vector3(_mazeSize.x * _mazeSize.x, _mazeNodePrefab.transform.localScale.y, _mazeSize.y * _mazeSize.y);
     }
 
-    public void ToggleNodeColors()
+    public void SwitchVision(bool isDark)
     {
-        if (_darkVision)
-        {
-            _darkVision = false;
-        }
-        else
-        {
-            _darkVision = true;
-        }
-
-        _chanegedVision = true;
+        _darkVision = isDark;
+        _changedVision = true;
     }
 
     public void SetNodeColors()
     {
-        if (_chanegedVision)
+        foreach (var node in _createdMazeNodes)
         {
-            foreach (var node in _createdMazeNodes)
-            {
-                node.SetMaterial(_darkVision);
-            }
-            _chanegedVision = false;
+            node.SetMaterial(_darkVision);
         }
+        _changedVision = false;
     }
 
     private void GenerateMazeInstantaneously(Vector2Int size)
@@ -98,8 +110,8 @@ public class MazeGenerator : MonoBehaviour
         {
             for (int y = 0; y < size.y; y++)
             {
-                Vector3 nodePos = new Vector3(x/* - (size.x / 2)*/, 0, y/* - (size.x / 2)*/);
-                MazeNode newNode = Instantiate(_mazeNodePrefab, nodePos, Quaternion.identity, transform);
+                Vector3 nodePos = new Vector3(x * _mazeNodePrefab.transform.localScale.x + transform.position.x /* - (size.x / 2)*/, 0, y * _mazeNodePrefab.transform.localScale.y + transform.position.z /* - (size.x / 2)*/);
+                MazeNode newNode = Instantiate(_mazeNodePrefab, nodePos, Quaternion.identity, _nodesHolder);
                 newNode.SetPosOnMatrix(x, y);
                 nodes.Add(newNode);
                 _createdMazeNodes.Add(newNode);
@@ -232,8 +244,8 @@ public class MazeGenerator : MonoBehaviour
         {
             for (int y = 0; y < size.y; y++)
             {
-                Vector3 nodePos = new Vector3(x/* - (size.x / 2)*/, 0, y/* - (size.x / 2)*/);
-                MazeNode newNode = Instantiate(_mazeNodePrefab, nodePos, Quaternion.identity, transform);
+                Vector3 nodePos = new Vector3(x * _mazeNodePrefab.transform.localScale.x /* - (size.x / 2)*/, 0, y * _mazeNodePrefab.transform.localScale.y /* - (size.x / 2)*/);
+                MazeNode newNode = Instantiate(_mazeNodePrefab, nodePos, Quaternion.identity, _nodesHolder);
                 newNode.SetPosOnMatrix(x, y);
                 nodes.Add(newNode);
                 _createdMazeNodes.Add(newNode);
@@ -372,21 +384,48 @@ public class MazeGenerator : MonoBehaviour
             {
                 MazeNode tempStartNode = _createdMazeNodes[Random.Range(0, _createdMazeNodes.Count)];
                 _endCord.Set(tempStartNode.PosCords.x, tempStartNode.PosCords.y);
+
             }
 
             for (int i = 0; i < _createdMazeNodes.Count; i++)
             {
                 if (_createdMazeNodes[i].PosCords.x == _startCord.x && _createdMazeNodes[i].PosCords.y == _startCord.y)
                 {
-                    GameObject entrance = Instantiate(_portalPrefab, _createdMazeNodes[i].transform.position, Quaternion.identity, _createdMazeNodes[i].transform);
+                    GameObject entrance = Instantiate(_portalPrefab, _createdMazeNodes[i].transform.position + Vector3.up, Quaternion.identity, InteractablesHolder);
+                    _portalRef = entrance;
                 }
 
                 if (_createdMazeNodes[i].PosCords.x == _endCord.x && _createdMazeNodes[i].PosCords.y == _endCord.y)
                 {
-                    GameObject endpoint = Instantiate(_corePrefab, _createdMazeNodes[i].transform.position, Quaternion.identity, _createdMazeNodes[i].transform);
+                    GameObject endpoint = Instantiate(_corePrefab, _createdMazeNodes[i].transform.position + Vector3.up, Quaternion.identity, InteractablesHolder);
+                    _coreRef = endpoint;
+                    int typeChoice = Random.Range(0, Enum.GetNames(typeof(CoreType)).Length);
+                    _coreType = (CoreType)typeChoice;
+                    _coreRef.GetComponent<Core>().SetCoreType(_coreType);
                 }
             }
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            IsPlayerInMaze = true;
+            SwitchVision(true);
+        }
+        else if (other.CompareTag("Scout"))
+        {
+            SwitchVision(false);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            IsPlayerInMaze = false;
+            SwitchVision(false);
+        }
     }
 }
