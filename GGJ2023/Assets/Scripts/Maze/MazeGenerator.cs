@@ -29,9 +29,12 @@ public class MazeGenerator : MonoBehaviour
     private BoxCollider _mazeCollider;
 
     public bool IsPlayerInMaze;
+    public Light PlayerSpotLight;
+    private Material _skyboxMaterial;
     private void Awake()
     {
         _mazeCollider = GetComponent<BoxCollider>();
+        _skyboxMaterial = RenderSettings.skybox;
     }
 
     private void Start()
@@ -90,6 +93,15 @@ public class MazeGenerator : MonoBehaviour
     {
         _darkVision = isDark;
         _changedVision = true;
+        PlayerSpotLight.enabled = isDark;
+        if (isDark)
+        {
+            RenderSettings.skybox = null;
+        }
+        else
+        {
+            RenderSettings.skybox = _skyboxMaterial;
+        }
     }
 
     public void SetNodeColors()

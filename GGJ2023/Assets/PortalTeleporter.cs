@@ -46,6 +46,7 @@ public class PortalTeleporter : MonoBehaviour
             ControllersSwapManager.Instance.CurrentPortalPos = gameObject.transform;
             ControllersSwapManager.Instance.PlayerInPortalCollider = true;
             player = other.gameObject;
+            mazeGenerator.PlayerSpotLight = other.GetComponentInChildren<Light>();
         }
     }
     private void OnTriggerExit(Collider other)
