@@ -14,6 +14,8 @@ public class MazeNode : MonoBehaviour
     [SerializeField] private GameObject[] _walls;
     [SerializeField] private MeshRenderer _floormesh;
     [SerializeField] private Vector2Int _posCords;
+    [SerializeField] private Material _darkVisionMaterail;
+    [SerializeField] private Material _lightVisionMaterail;
 
     public Vector2Int PosCords { get => _posCords; }
 

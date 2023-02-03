@@ -46,7 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mazeNodePrefab: {fileID: 3375219529879197419, guid: d7d114694f35348419078b64a591388e,
     type: 3}
+  _createdMazeNodes: []
   _mazeSize: {x: 5, y: 5}
   _startCord: {x: 0, y: 0}
+  _endCord: {x: 0, y: 0}
   _randStart: 0
   _showDrawing: 0
+  _createMaze: 1
+  _portalPrefab: {fileID: 0}
+  _corePrefab: {fileID: 0}
