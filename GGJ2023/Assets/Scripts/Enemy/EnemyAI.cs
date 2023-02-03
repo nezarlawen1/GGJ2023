@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour
     public NavMeshAgent Agent;
     public Transform Player;
     public GameObject HandCollider;
+    public HealthHandler HealthHandlerRef;
 
     // Patroling
     public bool CanChase = true;
@@ -25,6 +26,12 @@ public class EnemyAI : MonoBehaviour
     {
         Agent = GetComponent<NavMeshAgent>();
         Player = GameObject.FindGameObjectWithTag("Tree").transform;
+        HealthHandlerRef.OnDeath += HealthHandlerRef_OnDeath;
+    }
+
+    private void HealthHandlerRef_OnDeath(object sender, System.EventArgs e)
+    {
+        EnemyDeath();
     }
 
     void Update()
@@ -61,6 +68,7 @@ public class EnemyAI : MonoBehaviour
     {
         //Debug.Log("Reseting");
         yield return new WaitForSeconds(attackCoolDown);
+        HandCollider.SetActive(false);
         boolToReset();
         //Debug.Log("Done");
     }
@@ -82,12 +90,17 @@ public class EnemyAI : MonoBehaviour
         if (!AlreadyAttacked)
         {
             //Attack code here
-            HandCollider.SetActive(false);
+            HandCollider.SetActive(true);
             //End of attack code
 
             AlreadyAttacked = true;
             StartCoroutine(ResetAttack(AttackCoolDownTime, delegate () { AlreadyAttacked = false; }));
         }
 
+    }
+
+    private void EnemyDeath()
+    {
+        Destroy(gameObject);
     }
 }
