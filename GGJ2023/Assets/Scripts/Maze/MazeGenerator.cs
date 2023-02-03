@@ -98,7 +98,7 @@ public class MazeGenerator : MonoBehaviour
         {
             for (int y = 0; y < size.y; y++)
             {
-                Vector3 nodePos = new Vector3(x/* - (size.x / 2)*/, 0, y/* - (size.x / 2)*/);
+                Vector3 nodePos = new Vector3(x * _mazeNodePrefab.transform.localScale.x /* - (size.x / 2)*/, 0, y * _mazeNodePrefab.transform.localScale.y /* - (size.x / 2)*/);
                 MazeNode newNode = Instantiate(_mazeNodePrefab, nodePos, Quaternion.identity, transform);
                 newNode.SetPosOnMatrix(x, y);
                 nodes.Add(newNode);
