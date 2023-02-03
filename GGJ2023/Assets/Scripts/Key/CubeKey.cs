@@ -9,6 +9,8 @@ public class CubeKey : MonoBehaviour
     [SerializeField] private Transform _holder;
     [SerializeField] private CoreType _coreType;
 
+    public CoreType CoreType { get => _coreType;}
+
     private void Awake()
     {
         if (Instance == null)
