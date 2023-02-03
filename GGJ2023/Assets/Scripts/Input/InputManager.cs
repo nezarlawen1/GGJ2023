@@ -37,6 +37,8 @@ public class InputManager : MonoBehaviour
                     if (GameManager.Instance.CurrentMaze.IsPlayerInMaze)
                     {
                         gameObject.transform.position = ControllersSwapManager.Instance.CurrentPortalPos.position;
+                        GameManager.Instance.CurrentMaze.IsPlayerInMaze = false;
+                        GameManager.Instance.CurrentMaze.SwitchVision(false);
                     }
                     else
                     {

@@ -30,7 +30,7 @@ public class MazeGenerator : MonoBehaviour
 
     public bool IsPlayerInMaze;
     public Light PlayerSpotLight;
-    private Material _skyboxMaterial;
+    public Material _skyboxMaterial;
     private void Awake()
     {
         _mazeCollider = GetComponent<BoxCollider>();
@@ -436,15 +436,16 @@ public class MazeGenerator : MonoBehaviour
         }
         else if (other.CompareTag("Scout"))
         {
+            IsPlayerInMaze = false;
             SwitchVision(false);
         }
     }
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        IsPlayerInMaze = false;
-    //        SwitchVision(false);
-    //    }
-    //}
+    /*private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            //IsPlayerInMaze = false;
+            SwitchVision(false);
+        }
+    }*/
 }
