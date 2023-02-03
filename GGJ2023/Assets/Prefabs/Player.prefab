@@ -242,7 +242,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 183
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -419,6 +419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152d2507355e0474c91d9c926b8a4c06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShootPress: 0
+  ShootHold: 0
 --- !u!114 &7859231428527368522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,6 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea4940ea202afdb4186d76f265880283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputManager: {fileID: 7859231428527368523}
   FirePoint: {fileID: 3195570840762408816}
   Projectile: {fileID: 2334144745104709251, guid: 3adb1bc94c5ae014b9a813c0aea88be6,
     type: 3}
@@ -471,6 +474,7 @@ MonoBehaviour:
   _layerToHit:
     serializedVersion: 2
     m_Bits: 128
+  _projectileSpeed: 30
   _cooldown: 1
 --- !u!1 &7859231428826308642
 GameObject:
