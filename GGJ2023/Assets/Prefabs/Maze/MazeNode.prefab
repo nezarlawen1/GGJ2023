@@ -54,7 +54,16 @@ MonoBehaviour:
   - {fileID: 3375219529966167662}
   - {fileID: 3375219531386241665}
   - {fileID: 3375219530833136472}
+  _wallMeshes:
+  - {fileID: 3375219530145734510}
+  - {fileID: 3375219529966167661}
+  - {fileID: 3375219531386241668}
+  - {fileID: 3375219530833136479}
   _floormesh: {fileID: 3375219530992252789}
+  _posCords: {x: 0, y: 0}
+  _darkVisionMaterail: {fileID: 2100000, guid: eee977017b0623b4fbe1f45c31bc3e28, type: 2}
+  _lightVisionMaterail: {fileID: 2100000, guid: 9e71185e0caea3141ae238884a2a3b33,
+    type: 2}
 --- !u!1 &3375219529966167662
 GameObject:
   m_ObjectHideFlags: 0
