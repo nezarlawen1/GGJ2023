@@ -98,7 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 690780e8f92e49f4ea983058c72cc196,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -497,7 +498,7 @@ MonoBehaviour:
   PlayerCanvases: {fileID: 113140060}
   ScoutCanvases: {fileID: 85646268}
   ScoutRef: {fileID: 921243968}
-  ScoutFirstPos: {fileID: 0}
+  ScoutFirstPos: {x: 0, y: 0, z: 0}
   CurrentPortalPos: {fileID: 0}
   PlayerInPortalCollider: 0
   PlayerCanTeleport: 0
@@ -517,6 +518,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1231755338
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3139479369286227040, guid: 61ea5818eebb0714599527638ace4bed,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139479369286227040, guid: 61ea5818eebb0714599527638ace4bed,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.981003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139479369286227040, guid: 61ea5818eebb0714599527638ace4bed,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 50.28007
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139479369286227040, guid: 61ea5818eebb0714599527638ace4bed,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.382088
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139479369286227040, guid: 61ea5818eebb0714599527638ace4bed,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139479369286227040, guid: 61ea5818eebb0714599527638ace4bed,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139479369286227040, guid: 61ea5818eebb0714599527638ace4bed,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139479369286227040, guid: 61ea5818eebb0714599527638ace4bed,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139479369286227040, guid: 61ea5818eebb0714599527638ace4bed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139479369286227040, guid: 61ea5818eebb0714599527638ace4bed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139479369286227040, guid: 61ea5818eebb0714599527638ace4bed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139479369286227055, guid: 61ea5818eebb0714599527638ace4bed,
+        type: 3}
+      propertyPath: m_Name
+      value: MrPsParticles
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 61ea5818eebb0714599527638ace4bed, type: 3}
 --- !u!1 &1232479739
 GameObject:
   m_ObjectHideFlags: 0

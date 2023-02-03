@@ -29,9 +29,12 @@ public class MazeGenerator : MonoBehaviour
     private BoxCollider _mazeCollider;
 
     public bool IsPlayerInMaze;
+    public Light PlayerSpotLight;
+    public Material _skyboxMaterial;
     private void Awake()
     {
         _mazeCollider = GetComponent<BoxCollider>();
+        _skyboxMaterial = RenderSettings.skybox;
     }
 
     private void Start()
@@ -90,6 +93,15 @@ public class MazeGenerator : MonoBehaviour
     {
         _darkVision = isDark;
         _changedVision = true;
+        PlayerSpotLight.enabled = isDark;
+        if (isDark)
+        {
+            RenderSettings.skybox = null;
+        }
+        else
+        {
+            RenderSettings.skybox = _skyboxMaterial;
+        }
     }
 
     public void SetNodeColors()
@@ -408,6 +420,13 @@ public class MazeGenerator : MonoBehaviour
 
     }
 
+    public void RerollType()
+    {
+        int typeChoice = Random.Range(0, Enum.GetNames(typeof(CoreType)).Length);
+        _coreType = (CoreType)typeChoice;
+        _coreRef.GetComponent<Core>().SetCoreType(_coreType);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -417,15 +436,16 @@ public class MazeGenerator : MonoBehaviour
         }
         else if (other.CompareTag("Scout"))
         {
-            SwitchVision(false);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
             IsPlayerInMaze = false;
             SwitchVision(false);
         }
     }
+    /*private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            //IsPlayerInMaze = false;
+            SwitchVision(false);
+        }
+    }*/
 }

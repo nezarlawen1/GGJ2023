@@ -9,6 +9,8 @@ public class PortalTeleporter : MonoBehaviour
     public MazeGenerator mazeGenerator;
     public bool open = false;
 
+    private GameObject player;
+
     private void Update()
     {
         if (exitPoint == null)
@@ -16,6 +18,20 @@ public class PortalTeleporter : MonoBehaviour
             GameManager.Instance.CurrentMaze = mazeGenerator;
             exitPoint = mazeGenerator._portalRef.transform;
         }
+        if (ControllersSwapManager.Instance.PlayerCanTeleport && player != null)
+        {
+            Debug.Log("Player TELEPORTED");
+
+            Teleport();
+        }
+    }
+
+    private void Teleport()
+    {
+        player.transform.position = exitPoint.transform.position;
+        ControllersSwapManager.Instance.PlayerCanTeleport = false;
+        player = null;
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,11 +45,8 @@ public class PortalTeleporter : MonoBehaviour
         {
             ControllersSwapManager.Instance.CurrentPortalPos = gameObject.transform;
             ControllersSwapManager.Instance.PlayerInPortalCollider = true;
-            if (ControllersSwapManager.Instance.PlayerCanTeleport)
-            {
-                Debug.Log("Player TELEPORTED");
-                other.transform.position = exitPoint.transform.position;
-            }
+            player = other.gameObject;
+            mazeGenerator.PlayerSpotLight = other.GetComponentInChildren<Light>();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -41,6 +54,8 @@ public class PortalTeleporter : MonoBehaviour
         if (other.tag == "Player")
         {
             ControllersSwapManager.Instance.PlayerInPortalCollider = false;
+            //ControllersSwapManager.Instance.CurrentPortalPos = null;
+            
         }
     }
 

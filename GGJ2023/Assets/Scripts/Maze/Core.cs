@@ -5,10 +5,10 @@ using UnityEngine;
 
 public enum CoreType
 {
-    Norori = 0,
-    Suori,
-    Austri,
-    Vestri
+    Austri = 0,
+    Norori,
+    Vestri,
+    Suori
 }
 
 public class Core : MonoBehaviour
@@ -20,7 +20,7 @@ public class Core : MonoBehaviour
     private GameObject _player;
 
     public bool Purified { get => _purified;}
-
+    public CoreType CoreType { get => _coreType;}
 
     private void Update()
     {
