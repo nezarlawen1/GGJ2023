@@ -263,12 +263,12 @@ PrefabInstance:
     - target: {fileID: 7859231428527368535, guid: b39c86c972659694c83e94f8d84e4e8c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 14.8
       objectReference: {fileID: 0}
     - target: {fileID: 7859231428527368535, guid: b39c86c972659694c83e94f8d84e4e8c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7859231428527368535, guid: b39c86c972659694c83e94f8d84e4e8c,
         type: 3}
@@ -590,32 +590,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5565271900957925222, guid: 1372975fe22f4f941ac1c6a3b70b68ae,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565271900957925223, guid: 1372975fe22f4f941ac1c6a3b70b68ae,
-        type: 3}
-      propertyPath: _endCord.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565271900957925223, guid: 1372975fe22f4f941ac1c6a3b70b68ae,
-        type: 3}
-      propertyPath: _endCord.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565271900957925223, guid: 1372975fe22f4f941ac1c6a3b70b68ae,
-        type: 3}
-      propertyPath: _corePrefab
-      value: 
-      objectReference: {fileID: 6659177564634505693, guid: d9ea8a0230912ad48a5f66d941787a19,
-        type: 3}
-    - target: {fileID: 5565271900957925223, guid: 1372975fe22f4f941ac1c6a3b70b68ae,
-        type: 3}
-      propertyPath: _portalPrefab
-      value: 
-      objectReference: {fileID: 622469284623515221, guid: 2c4fabbeefc00d54a8faf839d31f6d9e,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1372975fe22f4f941ac1c6a3b70b68ae, type: 3}
