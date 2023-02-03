@@ -124,12 +124,12 @@ MonoBehaviour:
   _createMaze: 1
   _portalPrefab: {fileID: 622469284623515221, guid: 2c4fabbeefc00d54a8faf839d31f6d9e,
     type: 3}
-  _corePrefab: {fileID: 6659177564634505693, guid: d9ea8a0230912ad48a5f66d941787a19,
+  _corePrefab: {fileID: 6659177564634505693, guid: d81a63610eb20a148917b6ed426dc5f2,
     type: 3}
   _portalRef: {fileID: 0}
   _coreRef: {fileID: 0}
   _darkVision: 0
-  _chanegedVision: 0
+  _changedVision: 0
 --- !u!65 &1309732682752919209
 BoxCollider:
   m_ObjectHideFlags: 0
