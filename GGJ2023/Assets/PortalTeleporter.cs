@@ -16,7 +16,7 @@ public class PortalTeleporter : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("PLAYER IS ON TRIGGER");
+            Debug.Log("PLAYER TELEPORTED");
             player.transform.position = exitPoint.transform.position;
 
 
