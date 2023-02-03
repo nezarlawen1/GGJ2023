@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "Hold(duration=0.3,pressPoint=0.4)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "RetrackHold",
+                    "type": "Button",
+                    "id": "b8e35c1d-3ac4-42af-a62d-b4f6300e10f6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.3,pressPoint=0.4)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -148,6 +157,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ShootHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "718318d9-382f-41f6-9ded-b1ce639a0db3",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RetrackHold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
