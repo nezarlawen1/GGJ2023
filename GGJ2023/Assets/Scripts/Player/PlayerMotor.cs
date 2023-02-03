@@ -29,6 +29,14 @@ public class PlayerMotor : MonoBehaviour
     {
         isGrounded = controller.isGrounded;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Core"))
+        {
+            GameManager.Instance.CurrentCore = other.GetComponent<Core>();
+        }
+    }
     #endregion
     #region Methods
     public void ProcessPlayerMove(Vector2 input)
