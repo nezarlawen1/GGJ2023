@@ -10,6 +10,7 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private MazeNode _mazeNodePrefab;
     [SerializeField] private Transform _nodesHolder, InteractablesHolder;
     [SerializeField] private List<MazeNode> _createdMazeNodes;
+    [SerializeField] private MazeNode _roofNode;
     [SerializeField] private Vector2Int _mazeSize = new Vector2Int(5, 5);
     [SerializeField] private Vector2Int _startCord;
     [SerializeField] private Vector2Int _endCord;
@@ -31,6 +32,7 @@ public class MazeGenerator : MonoBehaviour
     public bool IsPlayerInMaze;
     public Light PlayerSpotLight;
     public Material _skyboxMaterial;
+
     private void Awake()
     {
         _mazeCollider = GetComponent<BoxCollider>();
@@ -110,6 +112,7 @@ public class MazeGenerator : MonoBehaviour
         {
             node.SetMaterial(_darkVision);
         }
+        _roofNode.SetMaterial(_darkVision);
         _changedVision = false;
     }
 
@@ -418,6 +421,9 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
+        Vector3 tempPos = new Vector3(_mazeSize.x * 2 + transform.position.x, _mazeSize.x + transform.position.y, _mazeSize.y * 2 + transform.position.z);
+        _roofNode = Instantiate(_mazeNodePrefab, tempPos, Quaternion.identity, _nodesHolder);
+        _roofNode.transform.localScale = new Vector3(_mazeSize.x * _mazeSize.x, _mazeNodePrefab.transform.localScale.y, _mazeSize.y * _mazeSize.y);
     }
 
     public void RerollType()
