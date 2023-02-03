@@ -71,6 +71,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold(duration=0.3,pressPoint=0.4)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RetrackHold"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8e35c1d-3ac4-42af-a62d-b4f6300e10f6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.3,pressPoint=0.4)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""ShootHold"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""718318d9-382f-41f6-9ded-b1ce639a0db3"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RetrackHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +205,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_SwapToScout = m_Player.FindAction("SwapToScout", throwIfNotFound: true);
         m_Player_ShootPress = m_Player.FindAction("ShootPress", throwIfNotFound: true);
         m_Player_ShootHold = m_Player.FindAction("ShootHold", throwIfNotFound: true);
+        m_Player_RetrackHold = m_Player.FindAction("RetrackHold", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,6 +270,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SwapToScout;
     private readonly InputAction m_Player_ShootPress;
     private readonly InputAction m_Player_ShootHold;
+    private readonly InputAction m_Player_RetrackHold;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -258,6 +280,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @SwapToScout => m_Wrapper.m_Player_SwapToScout;
         public InputAction @ShootPress => m_Wrapper.m_Player_ShootPress;
         public InputAction @ShootHold => m_Wrapper.m_Player_ShootHold;
+        public InputAction @RetrackHold => m_Wrapper.m_Player_RetrackHold;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -282,6 +305,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ShootHold.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootHold;
                 @ShootHold.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootHold;
                 @ShootHold.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootHold;
+                @RetrackHold.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRetrackHold;
+                @RetrackHold.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRetrackHold;
+                @RetrackHold.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRetrackHold;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -301,6 +327,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ShootHold.started += instance.OnShootHold;
                 @ShootHold.performed += instance.OnShootHold;
                 @ShootHold.canceled += instance.OnShootHold;
+                @RetrackHold.started += instance.OnRetrackHold;
+                @RetrackHold.performed += instance.OnRetrackHold;
+                @RetrackHold.canceled += instance.OnRetrackHold;
             }
         }
     }
@@ -312,5 +341,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnSwapToScout(InputAction.CallbackContext context);
         void OnShootPress(InputAction.CallbackContext context);
         void OnShootHold(InputAction.CallbackContext context);
+        void OnRetrackHold(InputAction.CallbackContext context);
     }
 }

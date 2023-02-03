@@ -22,7 +22,7 @@ public class MazeGenerator : MonoBehaviour
     [Header("Additional Generation")]
     [SerializeField] private GameObject _portalPrefab;
     [SerializeField] private GameObject _corePrefab;
-    [SerializeField] private GameObject _portalRef, _coreRef;
+    [SerializeField] public GameObject _portalRef, _coreRef;
     [SerializeField] private bool _darkVision;
     [SerializeField] private bool _changedVision;
     private BoxCollider _mazeCollider;

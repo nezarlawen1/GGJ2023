@@ -6,7 +6,6 @@ public class ControllersSwapManager : MonoBehaviour
 {
     public static ControllersSwapManager Instance;
     
-
     public InputManager PlayerInputManager;
     public InputManager ScoutInputManager;
 
@@ -16,6 +15,10 @@ public class ControllersSwapManager : MonoBehaviour
     public GameObject PlayerCanvases;
     public GameObject ScoutCanvases;
 
+    public GameObject ScoutRef;
+
+    public bool PlayerInPortalCollider = false;
+    public bool PlayerCanTeleport = false;
     private void Awake()
     {
         if (Instance == null)
@@ -43,9 +46,11 @@ public class ControllersSwapManager : MonoBehaviour
             ScoutCamera.SetActive(true);
             PlayerCanvases.SetActive(false);
             ScoutCanvases.SetActive(true);
+            ScoutRef.SetActive(true);
         }
         else
         {
+            ScoutRef.SetActive(false);
             PlayerInputManager.OnEnable();
             ScoutInputManager.OnDisable();
             PlayerCamera.SetActive(true);
