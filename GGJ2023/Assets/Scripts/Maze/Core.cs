@@ -20,7 +20,7 @@ public class Core : MonoBehaviour
     private GameObject _player;
 
     public bool Purified { get => _purified;}
-
+    public CoreType CoreType { get => _coreType;}
 
     private void Update()
     {

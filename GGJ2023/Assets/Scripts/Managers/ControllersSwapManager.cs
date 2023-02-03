@@ -16,7 +16,7 @@ public class ControllersSwapManager : MonoBehaviour
     public GameObject ScoutCanvases;
 
     public GameObject ScoutRef;
-    public Transform ScoutFirstPos;
+    public Vector3 ScoutFirstPos;
     public Transform CurrentPortalPos;
 
     public bool PlayerInPortalCollider = false;
@@ -36,7 +36,7 @@ public class ControllersSwapManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ScoutFirstPos = ScoutRef.transform;
+        ScoutFirstPos = ScoutRef.transform.position;
         SwapControlToScout(false);
     }
 
@@ -44,7 +44,7 @@ public class ControllersSwapManager : MonoBehaviour
     {
         if (state)
         {
-            ScoutFirstPos = ScoutRef.transform;
+            ScoutFirstPos = ScoutRef.transform.position;
             PlayerInputManager.OnDisable();
             ScoutInputManager.OnEnable();
             PlayerCamera.SetActive(false);
@@ -55,7 +55,7 @@ public class ControllersSwapManager : MonoBehaviour
         }
         else
         {
-            ScoutRef.transform.position = ScoutFirstPos.position;
+            ScoutRef.transform.position = ScoutFirstPos;
             ScoutRef.SetActive(false);
             PlayerInputManager.OnEnable();
             ScoutInputManager.OnDisable();
