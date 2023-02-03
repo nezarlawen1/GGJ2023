@@ -10,18 +10,12 @@ public class HealthHandler : MonoBehaviour
     [SerializeField] private int _maxHP;
     [SerializeField] private int _currentHP;
     [SerializeField] private bool isPlayer;
-    [SerializeField] private EnemyAI EnemyAIRef;
 
     private void Awake()
     {
-        EnemyAIRef = GetComponentInParent<EnemyAI>();
+        _currentHP = _maxHP;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public float GetHealthPercent()
     {
         return (float)_currentHP / _maxHP;
@@ -70,5 +64,6 @@ public class HealthHandler : MonoBehaviour
         {
             TakeDamage(other.gameObject);
         }
+        
     }
 }

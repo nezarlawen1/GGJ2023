@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour
     public LayerMask GroundLayer, PlayerLayer;
     public NavMeshAgent Agent;
     public Transform Player;
+    public GameObject HandCollider;
 
     // Patroling
     public bool CanChase = true;
@@ -23,7 +24,7 @@ public class EnemyAI : MonoBehaviour
     private void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
-        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        Player = GameObject.FindGameObjectWithTag("Tree").transform;
     }
 
     void Update()
@@ -81,7 +82,7 @@ public class EnemyAI : MonoBehaviour
         if (!AlreadyAttacked)
         {
             //Attack code here
-            //attack
+            HandCollider.SetActive(false);
             //End of attack code
 
             AlreadyAttacked = true;
