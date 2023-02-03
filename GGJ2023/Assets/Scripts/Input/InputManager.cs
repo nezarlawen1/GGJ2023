@@ -23,7 +23,8 @@ public class InputManager : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
 
-        
+        player.CycleKey.performed += ctx => CubeKey.Instance.NextCoreType();
+
     }
     private void Update()
     {
