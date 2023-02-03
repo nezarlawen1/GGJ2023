@@ -12,6 +12,9 @@ public class InputManager : MonoBehaviour
     private PlayerMotor motor;
     private PlayerLook look;
 
+    public bool ShootPress = false;
+    public bool ShootHold = false;
+
     private void Awake()
     {
         playerInput = new PlayerInput();
@@ -24,8 +27,24 @@ public class InputManager : MonoBehaviour
         {
             player.SwapToScout.performed += ctx => ControllersSwapManager.Instance.SwapControlToScout(true);
 
-        }
+            player.ShootPress.performed += ctx =>
+            {
+                if (ctx.interaction is PressInteraction)
+                {
+                    ShootPress = true;
+                }
+            };
+            player.ShootPress.canceled += ctx => ShootPress = false;
 
+            player.ShootHold.performed += ctx =>
+            {
+                if (ctx.interaction is HoldInteraction)
+                {
+                    ShootHold = true;
+                }
+            };
+            player.ShootHold.canceled += ctx => ShootHold = false;
+        }
     }
     private void FixedUpdate()
     {

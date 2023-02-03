@@ -53,6 +53,24 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShootPress"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e7adb01-de6c-4336-8ab6-c0df4da5fc45"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(pressPoint=0.2,behavior=2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShootHold"",
+                    ""type"": ""Button"",
+                    ""id"": ""3d75d50c-38e9-4bbd-8c9f-aa0ab4d64d26"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.3,pressPoint=0.4)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +150,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""SwapToScout"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e2558e8-5cc0-4006-9ff9-4075b8a2c1a3"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShootPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3cff05f-71b1-47dc-93d3-e984338e002e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShootHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +183,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_SwapToScout = m_Player.FindAction("SwapToScout", throwIfNotFound: true);
+        m_Player_ShootPress = m_Player.FindAction("ShootPress", throwIfNotFound: true);
+        m_Player_ShootHold = m_Player.FindAction("ShootHold", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,6 +247,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_SwapToScout;
+    private readonly InputAction m_Player_ShootPress;
+    private readonly InputAction m_Player_ShootHold;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -212,6 +256,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @SwapToScout => m_Wrapper.m_Player_SwapToScout;
+        public InputAction @ShootPress => m_Wrapper.m_Player_ShootPress;
+        public InputAction @ShootHold => m_Wrapper.m_Player_ShootHold;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -230,6 +276,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @SwapToScout.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapToScout;
                 @SwapToScout.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapToScout;
                 @SwapToScout.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapToScout;
+                @ShootPress.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootPress;
+                @ShootPress.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootPress;
+                @ShootPress.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootPress;
+                @ShootHold.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootHold;
+                @ShootHold.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootHold;
+                @ShootHold.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootHold;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -243,6 +295,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @SwapToScout.started += instance.OnSwapToScout;
                 @SwapToScout.performed += instance.OnSwapToScout;
                 @SwapToScout.canceled += instance.OnSwapToScout;
+                @ShootPress.started += instance.OnShootPress;
+                @ShootPress.performed += instance.OnShootPress;
+                @ShootPress.canceled += instance.OnShootPress;
+                @ShootHold.started += instance.OnShootHold;
+                @ShootHold.performed += instance.OnShootHold;
+                @ShootHold.canceled += instance.OnShootHold;
             }
         }
     }
@@ -252,5 +310,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnSwapToScout(InputAction.CallbackContext context);
+        void OnShootPress(InputAction.CallbackContext context);
+        void OnShootHold(InputAction.CallbackContext context);
     }
 }
