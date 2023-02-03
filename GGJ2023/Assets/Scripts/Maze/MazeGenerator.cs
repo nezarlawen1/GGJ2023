@@ -28,6 +28,7 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private bool _changedVision;
     private BoxCollider _mazeCollider;
 
+    public bool IsPlayerInMaze;
     private void Awake()
     {
         _mazeCollider = GetComponent<BoxCollider>();
@@ -411,10 +412,19 @@ public class MazeGenerator : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            IsPlayerInMaze = true;
             SwitchVision(true);
         }
         else if (other.CompareTag("Scout"))
         {
+            SwitchVision(false);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            IsPlayerInMaze = false;
             SwitchVision(false);
         }
     }

@@ -277,7 +277,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &141838679
 Transform:
   m_ObjectHideFlags: 0
@@ -497,6 +497,8 @@ MonoBehaviour:
   PlayerCanvases: {fileID: 113140060}
   ScoutCanvases: {fileID: 85646268}
   ScoutRef: {fileID: 921243968}
+  ScoutFirstPos: {fileID: 0}
+  CurrentPortalPos: {fileID: 0}
   PlayerInPortalCollider: 0
   PlayerCanTeleport: 0
 --- !u!4 &1221353919
@@ -845,7 +847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1771319043
 Transform:
   m_ObjectHideFlags: 0
@@ -1216,6 +1218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9131382d6b04f458c2e314f9be3ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentCore: {fileID: 0}
+  CurrentMaze: {fileID: 0}
 --- !u!4 &2042968526
 Transform:
   m_ObjectHideFlags: 0
