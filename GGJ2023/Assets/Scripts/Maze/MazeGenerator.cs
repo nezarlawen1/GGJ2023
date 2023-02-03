@@ -21,6 +21,8 @@ public class MazeGenerator : MonoBehaviour
     [Header("Additional Generation")]
     [SerializeField] private GameObject _portalPrefab;
     [SerializeField] private GameObject _corePrefab;
+    [SerializeField] private bool _darkVision;
+    [SerializeField] private bool _chanegedVision;
 
 
     private void Start()
@@ -31,6 +33,7 @@ public class MazeGenerator : MonoBehaviour
     private void Update()
     {
         DrawMaze();
+        SetNodeColors();
     }
 
     private void DrawMaze()
@@ -57,6 +60,32 @@ public class MazeGenerator : MonoBehaviour
             _createdMazeNodes.Clear();
             GenerateMazeInstantaneously(_mazeSize);
             GenerateAdditions();
+        }
+    }
+
+    public void ToggleNodeColors()
+    {
+        if (_darkVision)
+        {
+            _darkVision = false;
+        }
+        else
+        {
+            _darkVision = true;
+        }
+
+        _chanegedVision = true;
+    }
+
+    public void SetNodeColors()
+    {
+        if (_chanegedVision)
+        {
+            foreach (var node in _createdMazeNodes)
+            {
+                node.SetMaterial(_darkVision);
+            }
+            _chanegedVision = false;
         }
     }
 
