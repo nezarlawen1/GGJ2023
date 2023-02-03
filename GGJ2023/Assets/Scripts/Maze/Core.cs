@@ -5,10 +5,10 @@ using UnityEngine;
 
 public enum CoreType
 {
-    Norori = 0,
-    Suori,
-    Austri,
-    Vestri
+    Austri = 0,
+    Norori,
+    Vestri,
+    Suori
 }
 
 public class Core : MonoBehaviour
