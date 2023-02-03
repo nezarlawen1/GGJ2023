@@ -25,7 +25,10 @@ public class InputManager : MonoBehaviour
 
         if (gameObject.CompareTag("Player"))
         {
-            player.SwapToScout.performed += ctx => ControllersSwapManager.Instance.SwapControlToScout(true);
+            /*if (ControllersSwapManager.Instance.PlayerInPortalCollider)
+            {
+                player.SwapToScout.performed += ctx => ControllersSwapManager.Instance.SwapControlToScout(true);
+            }*/
 
             player.ShootPress.performed += ctx =>
             {
@@ -45,19 +48,46 @@ public class InputManager : MonoBehaviour
             };
             player.ShootHold.canceled += ctx => ShootHold = false;
         }
+        else if (gameObject.CompareTag("Scout"))
+        {
+            player.RetrackHold.started += ctx =>
+            {
+                if (ctx.interaction is HoldInteraction)
+                {
+                    ControllersSwapManager.Instance.SwapControlToScout(false);
+
+                    ControllersSwapManager.Instance.PlayerCanTeleport = true;
+
+                }
+            };
+        }
+    }
+    private void Update()
+    {
+        if (gameObject.CompareTag("Player"))
+        {
+            if (ControllersSwapManager.Instance.PlayerInPortalCollider)
+            {
+                player.SwapToScout.performed += ctx => ControllersSwapManager.Instance.SwapControlToScout(true);
+            }
+            if (ControllersSwapManager.Instance.PlayerCanTeleport)
+            {
+
+            }
+        }
     }
     private void FixedUpdate()
     {
         if (gameObject.CompareTag("Player"))
             motor.ProcessPlayerMove(player.Movement.ReadValue<Vector2>());
-        else if(gameObject.CompareTag("Scout"))
+        else if (gameObject.CompareTag("Scout"))
             motor.ProcessScoutMove(player.Movement.ReadValue<Vector2>());
     }
     private void LateUpdate()
     {
         if (gameObject.CompareTag("Player"))
             look.ProcessPlayerLook(player.Look.ReadValue<Vector2>());
-        else if(gameObject.CompareTag("Scout"))
+        else if (gameObject.CompareTag("Scout"))
             look.ProcessScoutLook(player.Look.ReadValue<Vector2>());
     }
     public void OnEnable()
