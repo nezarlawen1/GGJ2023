@@ -12,6 +12,7 @@ public class HealthHandler : MonoBehaviour
     [SerializeField] private HealthDisplay _healthDisplay;
 
     [SerializeField] private List<GameObject> _portalRefs = new List<GameObject>();
+    [SerializeField] private PortalSpawnerManager _portalSpawnerManager;
     [SerializeField] private int _damageRate = 1;
     [SerializeField] private float _damageInterval = 1;
     private float _damageTimer;
@@ -20,19 +21,36 @@ public class HealthHandler : MonoBehaviour
     {
         _currentHP = _maxHP;
         _healthDisplay.Setup(this);
+        for (int i = 0; i < _portalSpawnerManager.spawnPortalList.Count; i++)
+        {
+            _portalRefs.Add(null);
+        }
     }
 
     private void Update()
     {
+        for (int i = 0; i < _portalRefs.Count; i++)
+        {
+            _portalRefs[i] = _portalSpawnerManager.spawnPortalList[i].newPortal;
+        }
         DamageOverTime();
     }
 
     private void DamageOverTime()
     {
+        int count = 0;
+        foreach (var item in _portalRefs)
+        {
+            if (item != null)
+            {
+                count++;
+            }
+        }
+
         if (_damageTimer >= _damageInterval)
         {
             _damageTimer = 0;
-            Damage(_damageRate * _portalRefs.Count);
+            Damage(_damageRate * count);
         }
         else
         {

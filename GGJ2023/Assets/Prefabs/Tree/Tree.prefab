@@ -157,10 +157,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4130df8b3a9ad8e4a9f30d71843a1f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 1000
+  _maxHP: 1500
   _currentHP: 0
   _healthDisplay: {fileID: 7582232716592563291}
   _portalRefs: []
+  _portalSpawnerManager: {fileID: 0}
   _damageRate: 1
   _damageInterval: 1
 --- !u!1 &2598710034000480518
