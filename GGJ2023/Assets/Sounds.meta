@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GGJ2023/Assets/Sounds.meta
 guid: 755a3a04e72ed4d44ae3625b773436fc
+========
+guid: 97db4fabfb5b67741993e3cc295f30af
+>>>>>>>> George:GGJ2023/Assets/Sprites/VeksttreUI.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
