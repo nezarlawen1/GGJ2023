@@ -1162,11 +1162,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1221353919}
     m_Modifications:
-    - target: {fileID: 4051309049794373044, guid: b39c86c972659694c83e94f8d84e4e8c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7859231428527368521, guid: b39c86c972659694c83e94f8d84e4e8c,
         type: 3}
       propertyPath: m_Name
@@ -1253,6 +1248,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &683096222 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2291925033245877878, guid: b39c86c972659694c83e94f8d84e4e8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 683096219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &834231497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1260,6 +1267,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2598710033901787340, guid: 2ee4f91d26258bd45b8f43c6f12cf57e,
+        type: 3}
+      propertyPath: _maxHP
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2598710033901787340, guid: 2ee4f91d26258bd45b8f43c6f12cf57e,
         type: 3}
       propertyPath: _portalSpawnerManager
@@ -1325,6 +1337,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7582232716592563291, guid: 2ee4f91d26258bd45b8f43c6f12cf57e,
+        type: 3}
+      propertyPath: _gameOverTextPopup
+      value: 
+      objectReference: {fileID: 683096222}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ee4f91d26258bd45b8f43c6f12cf57e, type: 3}
 --- !u!1 &849012855 stripped

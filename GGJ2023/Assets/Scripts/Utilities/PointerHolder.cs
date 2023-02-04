@@ -26,6 +26,7 @@ public class PointerHolder : MonoBehaviour
         _color = Color.white;
         _color2 = Color.white;
         _color.a = 0;
+        _color2.a = 0;
         _portalsTextPopup.color = _color;
         _winTextPopup.color = _color2;
     }
