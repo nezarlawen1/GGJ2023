@@ -9,6 +9,7 @@ public class StreamVideo : MonoBehaviour
     public RawImage stage;
     public VideoPlayer background;
     public RawImage staticImage;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,7 @@ public class StreamVideo : MonoBehaviour
             background.Play();
 
         }
+    
     }
 
 }
