@@ -1162,6 +1162,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1221353919}
     m_Modifications:
+    - target: {fileID: 4051309049794373044, guid: b39c86c972659694c83e94f8d84e4e8c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7859231428527368521, guid: b39c86c972659694c83e94f8d84e4e8c,
         type: 3}
       propertyPath: m_Name
@@ -1227,6 +1232,18 @@ PrefabInstance:
 --- !u!114 &683096220 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6413505190106882837, guid: b39c86c972659694c83e94f8d84e4e8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 683096219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &683096221 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6839874735811421659, guid: b39c86c972659694c83e94f8d84e4e8c,
     type: 3}
   m_PrefabInstance: {fileID: 683096219}
   m_PrefabAsset: {fileID: 0}
@@ -2315,6 +2332,21 @@ PrefabInstance:
     - target: {fileID: 3674388796125507058, guid: a278fdce15f9ea7438f1121593e50d16,
         type: 3}
       propertyPath: _textPopup
+      value: 
+      objectReference: {fileID: 683096220}
+    - target: {fileID: 3674388796125507058, guid: a278fdce15f9ea7438f1121593e50d16,
+        type: 3}
+      propertyPath: _winTextPopup
+      value: 
+      objectReference: {fileID: 683096221}
+    - target: {fileID: 3674388796125507058, guid: a278fdce15f9ea7438f1121593e50d16,
+        type: 3}
+      propertyPath: _spawnerManager
+      value: 
+      objectReference: {fileID: 138702115}
+    - target: {fileID: 3674388796125507058, guid: a278fdce15f9ea7438f1121593e50d16,
+        type: 3}
+      propertyPath: _portalsTextPopup
       value: 
       objectReference: {fileID: 683096220}
     - target: {fileID: 3674388796125507059, guid: a278fdce15f9ea7438f1121593e50d16,
