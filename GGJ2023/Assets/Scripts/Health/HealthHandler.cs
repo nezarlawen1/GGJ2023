@@ -9,26 +9,40 @@ public class HealthHandler : MonoBehaviour
     public event EventHandler OnDeath;
     [SerializeField] private int _maxHP;
     [SerializeField] private int _currentHP;
-    [SerializeField] private bool isPlayer;
+    [SerializeField] private HealthDisplay _healthDisplay;
+
+    [SerializeField] private List<GameObject> _portalRefs = new List<GameObject>();
+    [SerializeField] private int _damageRate = 1;
+    [SerializeField] private float _damageInterval = 1;
+    private float _damageTimer;
 
     private void Awake()
     {
         _currentHP = _maxHP;
+        _healthDisplay.Setup(this);
+    }
+
+    private void Update()
+    {
+        DamageOverTime();
+    }
+
+    private void DamageOverTime()
+    {
+        if (_damageTimer >= _damageInterval)
+        {
+            _damageTimer = 0;
+            Damage(_damageRate * _portalRefs.Count);
+        }
+        else
+        {
+            _damageTimer += Time.deltaTime;
+        }
     }
 
     public float GetHealthPercent()
     {
         return (float)_currentHP / _maxHP;
-    }
-
-    private void TakeDamage(GameObject damagerObj)
-    {
-        Damager tempDamager = damagerObj.GetComponent<Damager>();
-
-        if (gameObject.tag == "Tree" && tempDamager.CanAffect == CanAffect.Tree || gameObject.tag == "Enemy" && tempDamager.CanAffect == CanAffect.Enemy)
-        {
-            Damage(tempDamager.DamageAmount);
-        }
     }
 
     public void Damage(int damageAmount)
@@ -56,14 +70,5 @@ public class HealthHandler : MonoBehaviour
     {
         _currentHP = _maxHP;
         if (OnHealthChanged != null) OnHealthChanged(this, EventArgs.Empty);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Damager"))
-        {
-            TakeDamage(other.gameObject);
-        }
-        
     }
 }

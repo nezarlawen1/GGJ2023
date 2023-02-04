@@ -95,7 +95,10 @@ public class MazeGenerator : MonoBehaviour
     {
         _darkVision = isDark;
         _changedVision = true;
-        PlayerSpotLight.enabled = isDark;
+        if (PlayerSpotLight != null)
+        {
+            PlayerSpotLight.enabled = isDark;
+        }
         if (isDark)
         {
             RenderSettings.skybox = null;
@@ -438,6 +441,7 @@ public class MazeGenerator : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             IsPlayerInMaze = true;
+            //PlayerSpotLight = other.GetComponentInChildren<Light>();
             SwitchVision(true);
         }
         else if (other.CompareTag("Scout"))

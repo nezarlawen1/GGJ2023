@@ -12,8 +12,7 @@ public class InputManager : MonoBehaviour
     private PlayerMotor motor;
     private PlayerLook look;
 
-    public bool ShootPress = false;
-    public bool ShootHold = false;
+   public bool ClosePortal = false;
 
     private void Awake()
     {
@@ -39,6 +38,7 @@ public class InputManager : MonoBehaviour
                         gameObject.transform.position = ControllersSwapManager.Instance.CurrentPortalPos.position;
                         GameManager.Instance.CurrentMaze.IsPlayerInMaze = false;
                         GameManager.Instance.CurrentMaze.SwitchVision(false);
+                        ClosePortal = true;
                     }
                     else
                     {
@@ -84,6 +84,19 @@ public class InputManager : MonoBehaviour
                 }
             }
         };
+
+        if (ClosePortal)
+        {
+            ControllersSwapManager.Instance.CurrentPortalPos.GetComponent<PortalTeleporter>().ShrinkPortal();
+            if (ControllersSwapManager.Instance.CurrentPortalPos.root.localScale.x < 0.05f)
+            {
+                Destroy(ControllersSwapManager.Instance.CurrentPortalPos.root.gameObject);
+                Destroy(GameManager.Instance.CurrentMaze.gameObject);
+                ControllersSwapManager.Instance.CurrentPortalPos = null;
+                GameManager.Instance.CurrentMaze = null;
+                ClosePortal = false;
+            }
+        }
     }
     private void FixedUpdate()
     {
