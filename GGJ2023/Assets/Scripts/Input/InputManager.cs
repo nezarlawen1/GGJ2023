@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
     private PlayerMotor motor;
     private PlayerLook look;
 
-   public bool ClosePortal = false;
+    public bool ClosePortal = false;
 
     private void Awake()
     {
@@ -22,12 +22,16 @@ public class InputManager : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
 
-        player.CycleKey.performed += ctx => CubeKey.Instance.NextCoreType();
 
     }
     private void Update()
     {
-        player.SwapToScout.performed += ctx =>
+        /*if (GameManager.Instance.CurrentMaze == null)
+        {*/
+            player.CycleKey.performed += ctx => CubeKey.Instance.NextCoreType();
+        //}
+
+        player.SwapToScout.started += ctx =>
         {
             if (ctx.interaction is PressInteraction)
             {
@@ -38,8 +42,11 @@ public class InputManager : MonoBehaviour
                         gameObject.transform.position = ControllersSwapManager.Instance.CurrentPortalPos.position;
                         GameManager.Instance.CurrentMaze.IsPlayerInMaze = false;
                         GameManager.Instance.CurrentMaze.SwitchVision(false);
-                        ClosePortal = true;
                         HudManager.Instance.state = HudManager.HudState.HumanState;
+                        if (GameManager.Instance.CurrentMaze._coreRef.GetComponent<Core>().Purified)
+                        {
+                            ClosePortal = true;
+                        }
                     }
                     else
                     {
@@ -70,7 +77,7 @@ public class InputManager : MonoBehaviour
                         else
                         {
                             GameManager.Instance.CurrentMaze.RerollType();
-                            
+
                         }
                         if (ControllersSwapManager.Instance.CurrentPortalPos.gameObject.GetComponent<PortalTeleporter>().open)
                         {
