@@ -55,24 +55,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ShootPress"",
-                    ""type"": ""Button"",
-                    ""id"": ""0e7adb01-de6c-4336-8ab6-c0df4da5fc45"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press(pressPoint=0.2,behavior=2)"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ShootHold"",
-                    ""type"": ""Button"",
-                    ""id"": ""3d75d50c-38e9-4bbd-8c9f-aa0ab4d64d26"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Hold(duration=0.3,pressPoint=0.4)"",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Enteract"",
                     ""type"": ""Button"",
                     ""id"": ""b8e35c1d-3ac4-42af-a62d-b4f6300e10f6"",
@@ -171,28 +153,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8e2558e8-5cc0-4006-9ff9-4075b8a2c1a3"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShootPress"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a3cff05f-71b1-47dc-93d3-e984338e002e"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShootHold"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""718318d9-382f-41f6-9ded-b1ce639a0db3"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -223,8 +183,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_SwapToScout = m_Player.FindAction("SwapToScout", throwIfNotFound: true);
-        m_Player_ShootPress = m_Player.FindAction("ShootPress", throwIfNotFound: true);
-        m_Player_ShootHold = m_Player.FindAction("ShootHold", throwIfNotFound: true);
         m_Player_Enteract = m_Player.FindAction("Enteract", throwIfNotFound: true);
         m_Player_CycleKey = m_Player.FindAction("CycleKey", throwIfNotFound: true);
     }
@@ -289,8 +247,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_SwapToScout;
-    private readonly InputAction m_Player_ShootPress;
-    private readonly InputAction m_Player_ShootHold;
     private readonly InputAction m_Player_Enteract;
     private readonly InputAction m_Player_CycleKey;
     public struct PlayerActions
@@ -300,8 +256,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @SwapToScout => m_Wrapper.m_Player_SwapToScout;
-        public InputAction @ShootPress => m_Wrapper.m_Player_ShootPress;
-        public InputAction @ShootHold => m_Wrapper.m_Player_ShootHold;
         public InputAction @Enteract => m_Wrapper.m_Player_Enteract;
         public InputAction @CycleKey => m_Wrapper.m_Player_CycleKey;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -322,12 +276,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @SwapToScout.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapToScout;
                 @SwapToScout.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapToScout;
                 @SwapToScout.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapToScout;
-                @ShootPress.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootPress;
-                @ShootPress.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootPress;
-                @ShootPress.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootPress;
-                @ShootHold.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootHold;
-                @ShootHold.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootHold;
-                @ShootHold.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootHold;
                 @Enteract.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnteract;
                 @Enteract.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnteract;
                 @Enteract.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnteract;
@@ -347,12 +295,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @SwapToScout.started += instance.OnSwapToScout;
                 @SwapToScout.performed += instance.OnSwapToScout;
                 @SwapToScout.canceled += instance.OnSwapToScout;
-                @ShootPress.started += instance.OnShootPress;
-                @ShootPress.performed += instance.OnShootPress;
-                @ShootPress.canceled += instance.OnShootPress;
-                @ShootHold.started += instance.OnShootHold;
-                @ShootHold.performed += instance.OnShootHold;
-                @ShootHold.canceled += instance.OnShootHold;
                 @Enteract.started += instance.OnEnteract;
                 @Enteract.performed += instance.OnEnteract;
                 @Enteract.canceled += instance.OnEnteract;
@@ -368,8 +310,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnSwapToScout(InputAction.CallbackContext context);
-        void OnShootPress(InputAction.CallbackContext context);
-        void OnShootHold(InputAction.CallbackContext context);
         void OnEnteract(InputAction.CallbackContext context);
         void OnCycleKey(InputAction.CallbackContext context);
     }

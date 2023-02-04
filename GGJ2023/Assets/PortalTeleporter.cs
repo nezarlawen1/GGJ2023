@@ -5,17 +5,24 @@ using UnityEngine;
 public class PortalTeleporter : MonoBehaviour
 {
     //public Transform enterPoint;
+    public GameObject MazePrefab;
     public Transform exitPoint;
     public MazeGenerator mazeGenerator;
     public bool open = false;
 
     private GameObject player;
 
+    private void Start()
+    {
+        GameObject newMaze = Instantiate(MazePrefab,transform.position - new Vector3(200,0,0),Quaternion.identity);
+        mazeGenerator = newMaze.GetComponent<MazeGenerator>();
+        
+    }
     private void Update()
     {
         if (exitPoint == null)
         {
-            GameManager.Instance.CurrentMaze = mazeGenerator;
+            
             exitPoint = mazeGenerator._portalRef.transform;
         }
         if (ControllersSwapManager.Instance.PlayerCanTeleport && player != null)
@@ -34,6 +41,11 @@ public class PortalTeleporter : MonoBehaviour
         
     }
 
+    public void ShrinkPortal()
+    {
+       transform.root.localScale = Vector3.Lerp(transform.root.localScale, Vector3.zero, 0.1f);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Scout")
@@ -43,6 +55,7 @@ public class PortalTeleporter : MonoBehaviour
         }
         if (other.tag == "Player")
         {
+            GameManager.Instance.CurrentMaze = mazeGenerator;
             ControllersSwapManager.Instance.CurrentPortalPos = gameObject.transform;
             ControllersSwapManager.Instance.PlayerInPortalCollider = true;
             player = other.gameObject;
