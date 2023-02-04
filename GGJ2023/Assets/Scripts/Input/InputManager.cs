@@ -12,7 +12,11 @@ public class InputManager : MonoBehaviour
     private PlayerMotor motor;
     private PlayerLook look;
 
+<<<<<<< HEAD
     public bool ClosePortal = false;
+=======
+   public bool ClosePortal = false;
+>>>>>>> parent of ede459d (Added Damage on Fault.)
 
     private void Awake()
     {
@@ -77,7 +81,11 @@ public class InputManager : MonoBehaviour
                         else
                         {
                             GameManager.Instance.CurrentMaze.RerollType();
+<<<<<<< HEAD
 
+=======
+                            
+>>>>>>> parent of ede459d (Added Damage on Fault.)
                         }
                         if (ControllersSwapManager.Instance.CurrentPortalPos.gameObject.GetComponent<PortalTeleporter>().open)
                         {
