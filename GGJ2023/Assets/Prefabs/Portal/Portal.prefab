@@ -125,6 +125,16 @@ PrefabInstance:
       propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6057082245631640028, guid: 9135c9c5efa102a4198eab73ddd66ec1,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057082245631640028, guid: 9135c9c5efa102a4198eab73ddd66ec1,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.38
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9135c9c5efa102a4198eab73ddd66ec1, type: 3}
 --- !u!4 &8520789673663464597 stripped

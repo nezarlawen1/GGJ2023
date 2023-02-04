@@ -14,9 +14,8 @@ public class PortalTeleporter : MonoBehaviour
 
     private void Start()
     {
-        GameObject newMaze = Instantiate(MazePrefab,transform.position - new Vector3(200,0,0),Quaternion.identity);
+        GameObject newMaze = Instantiate(MazePrefab,transform.position - new Vector3(Random.Range(200,250),0,0),Quaternion.identity);
         mazeGenerator = newMaze.GetComponent<MazeGenerator>();
-        
     }
     private void Update()
     {
