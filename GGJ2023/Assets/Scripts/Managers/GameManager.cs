@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public Core CurrentCore;
     public MazeGenerator CurrentMaze;
-
+    public RawImage HitFalshImage;
     private void Awake()
     {
         if (Instance == null)
@@ -24,5 +25,11 @@ public class GameManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public IEnumerator disableFlash()
+    {
+        yield return new WaitForSeconds(3);
+        HitFalshImage.gameObject.SetActive(false);
     }
 }

@@ -16,6 +16,7 @@ public class PlayerMotor : MonoBehaviour
     public float movementSpeed = 5f;
     public float Gravity = -9.8f;
     public Vector3 moveDirection;
+    public LayerMask GroundLayer;
     #endregion
     #region Monobehaviour Callbacks
     void Start()
