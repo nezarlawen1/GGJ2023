@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.098596185, g: 0.24037905, b: 0.15346141, a: 1}
+  m_IndirectSpecularColor: {r: 0.097787544, g: 0.23938382, b: 0.1527474, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -522,7 +522,7 @@ MonoBehaviour:
   PlayerCanvases: {fileID: 113140060}
   ScoutCanvases: {fileID: 1341311707}
   ScoutRef: {fileID: 0}
-  ScoutFirstPos: {fileID: 0}
+  ScoutFirstPos: {x: 0, y: 0, z: 0}
   CurrentPortalPos: {fileID: 0}
   PlayerInPortalCollider: 0
   PlayerCanTeleport: 0
