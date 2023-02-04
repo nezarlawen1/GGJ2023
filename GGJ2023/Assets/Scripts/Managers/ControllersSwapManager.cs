@@ -22,6 +22,9 @@ public class ControllersSwapManager : MonoBehaviour
     public bool PlayerInPortalCollider = false;
     public bool PlayerCanTeleport = false;
 
+    public delegate void PlaySoundDelegate(SoundManager.SoundType soundType);
+    public event PlaySoundDelegate PlaySoundEvent;
+
     private void Awake()
     {
         if (Instance == null)
@@ -38,6 +41,7 @@ public class ControllersSwapManager : MonoBehaviour
     {
         ScoutFirstPos = ScoutRef.transform.position;
         SwapControlToScout(false);
+        SoundManager.Instance.PlaySound(SoundManager.SoundType.None);
     }
 
     public void SwapControlToScout(bool state)
@@ -52,6 +56,8 @@ public class ControllersSwapManager : MonoBehaviour
             PlayerCanvases.SetActive(false);
             ScoutCanvases.SetActive(true);
             ScoutRef.SetActive(true);
+            SoundManager.Instance.PlaySound(SoundManager.SoundType.TurnToLight);
+            //if (PlaySoundEvent != null) PlaySoundEvent.Invoke(SoundManager.SoundType.TurnToLight);
         }
         else
         {
@@ -63,6 +69,8 @@ public class ControllersSwapManager : MonoBehaviour
             ScoutCamera.SetActive(false);
             PlayerCanvases.SetActive(true);
             ScoutCanvases.SetActive(false);
+            SoundManager.Instance.PlaySound(SoundManager.SoundType.TurnToHuman);
+            //if (PlaySoundEvent != null) PlaySoundEvent.Invoke(SoundManager.SoundType.TurnToHuman);
         }
     }
 }

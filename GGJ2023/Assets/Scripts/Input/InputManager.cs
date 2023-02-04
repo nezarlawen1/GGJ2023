@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class InputManager : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
 
-
+        player.Skip.performed += ctx => SceneManager.LoadScene("Game");
     }
     private void Update()
     {
@@ -79,6 +80,8 @@ public class InputManager : MonoBehaviour
                         {
                             GameManager.Instance.CurrentMaze.RerollType();
                             HealthHandler.Instance.Damage(DamageOnFault);
+                            GameManager.Instance.HitFalshImage.gameObject.SetActive(true);
+                            StartCoroutine(GameManager.Instance.disableFlash());
                         }
                         if (ControllersSwapManager.Instance.CurrentPortalPos.gameObject.GetComponent<PortalTeleporter>().open)
                         {

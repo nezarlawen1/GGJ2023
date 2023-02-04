@@ -338,6 +338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 851447784}
   - component: {fileID: 851447785}
+  - component: {fileID: 851447786}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -376,6 +377,20 @@ MonoBehaviour:
   videoPlayer: {fileID: 1065363461}
   sceneToLoad: Game
   switchSceneAfterVideoEnds: 1
+--- !u!114 &851447786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851447782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 152d2507355e0474c91d9c926b8a4c06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClosePortal: 0
+  DamageOnFault: 100
 --- !u!1 &1023277392
 GameObject:
   m_ObjectHideFlags: 0

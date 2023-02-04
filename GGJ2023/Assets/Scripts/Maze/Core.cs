@@ -59,6 +59,9 @@ public class Core : MonoBehaviour
     public void PurifyCore()
     {
         _purified = true;
+        SoundManager.Instance.PlaySound(SoundManager.SoundType.Purify);
+        //ControllersSwapManager.Instance.PlaySoundEvent += ctx => SoundManager.Instance.PlaySound(SoundManager.SoundType.Purify);
+            
     }
 
     private void OnTriggerEnter(Collider other)

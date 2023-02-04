@@ -72,7 +72,7 @@ public class HealthDisplay : MonoBehaviour
             {
                 _color.a = 0;
                 _gameOverTextPopup.color = _color;
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene("Game");
             }
         }
 

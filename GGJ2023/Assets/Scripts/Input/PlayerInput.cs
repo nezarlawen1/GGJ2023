@@ -71,6 +71,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skip"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a6f7e13-6cf5-4f56-9d7c-282b47f859d0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""CycleKey"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""452325be-8a0c-49b3-a450-376b1467b99a"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3aaf58c6-0079-49df-95c0-1c0e0e98e2dc"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +216,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_SwapToScout = m_Player.FindAction("SwapToScout", throwIfNotFound: true);
         m_Player_Enteract = m_Player.FindAction("Enteract", throwIfNotFound: true);
         m_Player_CycleKey = m_Player.FindAction("CycleKey", throwIfNotFound: true);
+        m_Player_Skip = m_Player.FindAction("Skip", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,6 +281,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SwapToScout;
     private readonly InputAction m_Player_Enteract;
     private readonly InputAction m_Player_CycleKey;
+    private readonly InputAction m_Player_Skip;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -258,6 +291,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @SwapToScout => m_Wrapper.m_Player_SwapToScout;
         public InputAction @Enteract => m_Wrapper.m_Player_Enteract;
         public InputAction @CycleKey => m_Wrapper.m_Player_CycleKey;
+        public InputAction @Skip => m_Wrapper.m_Player_Skip;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -282,6 +316,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @CycleKey.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCycleKey;
                 @CycleKey.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCycleKey;
                 @CycleKey.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCycleKey;
+                @Skip.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkip;
+                @Skip.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkip;
+                @Skip.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkip;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -301,6 +338,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @CycleKey.started += instance.OnCycleKey;
                 @CycleKey.performed += instance.OnCycleKey;
                 @CycleKey.canceled += instance.OnCycleKey;
+                @Skip.started += instance.OnSkip;
+                @Skip.performed += instance.OnSkip;
+                @Skip.canceled += instance.OnSkip;
             }
         }
     }
@@ -312,5 +352,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnSwapToScout(InputAction.CallbackContext context);
         void OnEnteract(InputAction.CallbackContext context);
         void OnCycleKey(InputAction.CallbackContext context);
+        void OnSkip(InputAction.CallbackContext context);
     }
 }

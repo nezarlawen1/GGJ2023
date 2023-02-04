@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Tree
   - Core
+  - Maze
+  - Grass
   layers:
   - Default
   - TransparentFX
