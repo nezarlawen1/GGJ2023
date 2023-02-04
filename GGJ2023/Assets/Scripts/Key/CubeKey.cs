@@ -22,7 +22,10 @@ public class CubeKey : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    private void Update()
+    {
+        RotateToType();
+    }
     private void OnValidate()
     {
         RotateToType();
@@ -40,7 +43,7 @@ public class CubeKey : MonoBehaviour
             _coreType++;
         }
 
-        RotateToType();
+        //RotateToType();
     }
 
     private void RotateToType()
@@ -48,19 +51,23 @@ public class CubeKey : MonoBehaviour
         switch (_coreType)
         {
             case CoreType.Austri:
-                _holder.localRotation = Quaternion.Euler(0f, 0f, 0f);
+                _holder.localRotation = Quaternion.Euler( Vector3.Lerp(_holder.localRotation.eulerAngles, Vector3.zero,0.01f));
+                //_holder.localRotation = Quaternion.Euler(0f, 0f, 0f);
                 break;
             case CoreType.Norori:
-                _holder.localRotation = Quaternion.Euler(0f, 90f, 0f);
+                _holder.localRotation = Quaternion.Euler(Vector3.Lerp(_holder.localRotation.eulerAngles, new Vector3(0f, 90f, 0f), 0.2f));
+                //_holder.localRotation = Quaternion.Euler(0f, 90f, 0f);
                 break;
             case CoreType.Vestri:
-                _holder.localRotation = Quaternion.Euler(0f, 180f, 0f);
+                _holder.localRotation = Quaternion.Euler(Vector3.Lerp(_holder.localRotation.eulerAngles, new Vector3(0f, 180f, 0f), 0.2f));
+                //_holder.localRotation = Quaternion.Euler(0f, 180f, 0f);
                 break;
             case CoreType.Suori:
-                _holder.localRotation = Quaternion.Euler(0f, 270f, 0f);
-                break;
-            default:
+                _holder.localRotation = Quaternion.Euler(Vector3.Lerp(_holder.localRotation.eulerAngles, new Vector3(0f, 270f, 0f), 0.2f));
+                //_holder.localRotation = Quaternion.Euler(0f, 270f, 0f);
                 break;
         }
     }
+
+
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3375219529879197418}
   - component: {fileID: 3375219529879197419}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MazeNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 3375219529966167634}
   - component: {fileID: 3375219529966167661}
   - component: {fileID: 3375219529966167660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WestWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 3375219530145734511}
   - component: {fileID: 3375219530145734510}
   - component: {fileID: 3375219530145734505}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EastWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 3375219530833136476}
   - component: {fileID: 3375219530833136479}
   - component: {fileID: 3375219530833136478}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SouthWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 3375219530992252794}
   - component: {fileID: 3375219530992252789}
   - component: {fileID: 3375219530992252788}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 3375219531386241669}
   - component: {fileID: 3375219531386241668}
   - component: {fileID: 3375219531386241671}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NorthWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
