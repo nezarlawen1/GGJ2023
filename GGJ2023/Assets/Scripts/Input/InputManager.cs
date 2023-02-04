@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
     {
         player.SwapToScout.performed += ctx =>
         {
-            if (ctx.interaction is HoldInteraction)
+            if (ctx.interaction is PressInteraction)
             {
                 if (gameObject.CompareTag("Player"))
                 {
@@ -39,15 +39,18 @@ public class InputManager : MonoBehaviour
                         GameManager.Instance.CurrentMaze.IsPlayerInMaze = false;
                         GameManager.Instance.CurrentMaze.SwitchVision(false);
                         ClosePortal = true;
+                        HudManager.Instance.state = HudManager.HudState.HumanState;
                     }
                     else
                     {
                         ControllersSwapManager.Instance.SwapControlToScout(true);
+                        HudManager.Instance.state = HudManager.HudState.ScoutState;
                     }
                 }
                 else if (gameObject.CompareTag("Scout"))
                 {
                     ControllersSwapManager.Instance.SwapControlToScout(false);
+                    HudManager.Instance.state = HudManager.HudState.HumanState;
                 }
             }
         };
@@ -67,10 +70,12 @@ public class InputManager : MonoBehaviour
                         else
                         {
                             GameManager.Instance.CurrentMaze.RerollType();
+                            
                         }
                         if (ControllersSwapManager.Instance.CurrentPortalPos.gameObject.GetComponent<PortalTeleporter>().open)
                         {
                             ControllersSwapManager.Instance.PlayerCanTeleport = true;
+                            HudManager.Instance.state = HudManager.HudState.HumanInMazeState;
                         }
                     }
                     if (GameManager.Instance.CurrentCore != null)
