@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     private PlayerLook look;
 
    public bool ClosePortal = false;
+   public int DamageOnFault = 100;
 
     private void Awake()
     {
@@ -70,7 +71,7 @@ public class InputManager : MonoBehaviour
                         else
                         {
                             GameManager.Instance.CurrentMaze.RerollType();
-                            
+                            HealthHandler.Instance.Damage(DamageOnFault);
                         }
                         if (ControllersSwapManager.Instance.CurrentPortalPos.gameObject.GetComponent<PortalTeleporter>().open)
                         {
