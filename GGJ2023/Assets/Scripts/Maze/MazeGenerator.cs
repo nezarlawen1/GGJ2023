@@ -4,6 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
+public enum SpawnArea
+{
+    FirstQuarter,
+    SecondQuarter,
+    ThirdQuarter,
+    FourthQuarter,
+}
+
 public class MazeGenerator : MonoBehaviour
 {
     [Header("Base Generation")]
@@ -14,9 +23,12 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private Vector2Int _mazeSize = new Vector2Int(5, 5);
     [SerializeField] private Vector2Int _startCord;
     [SerializeField] private Vector2Int _endCord;
+    [SerializeField] private SpawnArea _startSpawnArea;
+    [SerializeField] private SpawnArea _endSpawnArea;
     [SerializeField] private bool _randStart;
     [SerializeField] private bool _randEnd;
     [SerializeField] private bool _showDrawing;
+    [SerializeField] private bool _withRoof = true;
     [SerializeField] private bool _createMaze = true;
     private bool _creatingMaze;
 
@@ -115,7 +127,10 @@ public class MazeGenerator : MonoBehaviour
         {
             node.SetMaterial(_darkVision);
         }
-        _roofNode.SetMaterial(_darkVision);
+        if (_roofNode != null)
+        {
+            _roofNode.SetMaterial(_darkVision);
+        }
         _changedVision = false;
     }
 
@@ -142,9 +157,27 @@ public class MazeGenerator : MonoBehaviour
         // Choose Starting Node
         if (_randStart)
         {
-            MazeNode tempStartNode = nodes[Random.Range(0, nodes.Count)];
+            int nodeIndex = Random.Range(0, nodes.Count);
+            MazeNode tempStartNode = nodes[nodeIndex];
             currentPath.Add(tempStartNode);
             _startCord.Set(tempStartNode.PosCords.x, tempStartNode.PosCords.y);
+
+            if (nodeIndex >= 0 && nodeIndex < nodes.Count / 4)
+            {
+                _startSpawnArea = SpawnArea.FirstQuarter;
+            }
+            else if (nodeIndex >= nodes.Count / 4 && nodeIndex < nodes.Count / 4 * 2)
+            {
+                _startSpawnArea = SpawnArea.SecondQuarter;
+            }
+            else if (nodeIndex >= nodes.Count / 4 * 2 && nodeIndex < nodes.Count / 4 * 3)
+            {
+                _startSpawnArea = SpawnArea.ThirdQuarter;
+            }
+            else if (nodeIndex >= nodes.Count / 4 * 3 && nodeIndex <= nodes.Count)
+            {
+                _startSpawnArea = SpawnArea.FourthQuarter;
+            }
         }
         else
         {
@@ -278,7 +311,25 @@ public class MazeGenerator : MonoBehaviour
         // Choose Starting Node
         if (_randStart)
         {
-            currentPath.Add(nodes[Random.Range(0, nodes.Count)]);
+            int nodeIndex = Random.Range(0, nodes.Count);
+            currentPath.Add(nodes[nodeIndex]);
+
+            if (nodeIndex >= 0 && nodeIndex < nodes.Count / 4)
+            {
+                _startSpawnArea = SpawnArea.FirstQuarter;
+            }
+            else if (nodeIndex >= nodes.Count / 4 && nodeIndex < nodes.Count / 4 * 2)
+            {
+                _startSpawnArea = SpawnArea.SecondQuarter;
+            }
+            else if (nodeIndex >= nodes.Count / 4 * 2 && nodeIndex < nodes.Count / 4 * 3)
+            {
+                _startSpawnArea = SpawnArea.ThirdQuarter;
+            }
+            else if (nodeIndex >= nodes.Count / 4 * 3 && nodeIndex <= nodes.Count)
+            {
+                _startSpawnArea = SpawnArea.FourthQuarter;
+            }
         }
         else
         {
@@ -400,7 +451,13 @@ public class MazeGenerator : MonoBehaviour
         {
             if (_randEnd)
             {
-                MazeNode tempStartNode = _createdMazeNodes[Random.Range(0, _createdMazeNodes.Count)];
+                int nodeIndex = Random.Range(0, _createdMazeNodes.Count);
+                while (CheckArea(nodeIndex) == _startSpawnArea)
+                {
+                    nodeIndex = Random.Range(0, _createdMazeNodes.Count);
+                }
+                _endSpawnArea = CheckArea(nodeIndex);
+                MazeNode tempStartNode = _createdMazeNodes[nodeIndex];
                 _endCord.Set(tempStartNode.PosCords.x, tempStartNode.PosCords.y);
 
             }
@@ -424,9 +481,33 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
-        Vector3 tempPos = new Vector3(_mazeSize.x * 2 + transform.position.x, _mazeSize.x + transform.position.y, _mazeSize.y * 2 + transform.position.z);
-        _roofNode = Instantiate(_mazeNodePrefab, tempPos, Quaternion.identity, _nodesHolder);
-        _roofNode.transform.localScale = new Vector3(_mazeSize.x * _mazeSize.x, _mazeNodePrefab.transform.localScale.y, _mazeSize.y * _mazeSize.y);
+        if (_withRoof)
+        {
+            Vector3 tempPos = new Vector3(_mazeSize.x * 2 + transform.position.x, _mazeSize.x + transform.position.y, _mazeSize.y * 2 + transform.position.z);
+            _roofNode = Instantiate(_mazeNodePrefab, tempPos, Quaternion.identity, _nodesHolder);
+            _roofNode.transform.localScale = new Vector3(_mazeSize.x * _mazeSize.x, _mazeNodePrefab.transform.localScale.y, _mazeSize.y * _mazeSize.y);
+        }
+    }
+
+    private SpawnArea CheckArea(int nodeIndex)
+    {
+        if (nodeIndex >= 0 && nodeIndex < _createdMazeNodes.Count / 4)
+        {
+            return SpawnArea.FirstQuarter;
+        }
+        else if (nodeIndex >= _createdMazeNodes.Count / 4 && nodeIndex < _createdMazeNodes.Count / 4 * 2)
+        {
+            return SpawnArea.SecondQuarter;
+        }
+        else if (nodeIndex >= _createdMazeNodes.Count / 4 * 2 && nodeIndex < _createdMazeNodes.Count / 4 * 3)
+        {
+            return SpawnArea.ThirdQuarter;
+        }
+        else if (nodeIndex >= _createdMazeNodes.Count / 4 * 3 && nodeIndex <= _createdMazeNodes.Count)
+        {
+            return SpawnArea.FourthQuarter;
+        }
+        return SpawnArea.FourthQuarter;
     }
 
     public void RerollType()
