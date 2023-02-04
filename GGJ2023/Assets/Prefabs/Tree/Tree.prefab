@@ -214,6 +214,8 @@ MonoBehaviour:
   _healthIndicatorObj: {fileID: 2596378428143197976}
   _startPos: {x: 0, y: 0, z: 0}
   _endPos: {x: 0, y: 0, z: 0}
+  _gameOverTextPopup: {fileID: 0}
+  _appearTime: 2
 --- !u!1 &2941150518095742117
 GameObject:
   m_ObjectHideFlags: 0

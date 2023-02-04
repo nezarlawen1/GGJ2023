@@ -9,6 +9,8 @@ public class PortalPointer : MonoBehaviour
     [SerializeField] private Transform _spawnedPortal;
     [SerializeField] private bool _isSpawned;
 
+    public bool IsSpawned { get => _isSpawned;}
+
 
     // Update is called once per frame
     void Update()
