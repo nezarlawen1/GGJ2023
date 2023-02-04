@@ -23,14 +23,14 @@ public class PlayerShoot : MonoBehaviour
     }
     private void Update()
     {
-        if ((_inputManager.ShootPress || _inputManager.ShootHold) && _timer >= _cooldown)
+        /*if ((_inputManager.ShootPress || _inputManager.ShootHold) && _timer >= _cooldown)
         {
             Shoot();
         }
         else
         {
             _timer += Time.deltaTime;
-        }
+        }*/
     }
 
     public void Shoot()
