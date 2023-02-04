@@ -7,6 +7,8 @@ public class SpawnPortal : MonoBehaviour
     public GameObject PortalPrefab;
     public float TimeBetweenSpawns = 10f;
     [SerializeField] private Vector3 _spawnSectorRange = new Vector3(70, 1, 25);
+
+    public GameObject newPortal;
     private void Start()
     {
         StartCoroutine(RespawnDelay());
@@ -14,7 +16,7 @@ public class SpawnPortal : MonoBehaviour
 
     private void SpawnInRandomPos(Vector3 respawnPos)
     {
-        GameObject newPortal = Instantiate(PortalPrefab, respawnPos, Quaternion.identity);
+        newPortal = Instantiate(PortalPrefab, respawnPos, Quaternion.identity);
         newPortal.transform.LookAt(Vector3.zero);
     }
 
