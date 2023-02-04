@@ -15,6 +15,8 @@ public class HealthDisplay : MonoBehaviour
     {
         _healthHandler = system;
         _healthHandler.OnHealthChanged += _healthHandler_OnHealthChanged;
+        _startPos = _healthIndicatorObj.transform.position;
+        _endPos = new Vector3(_startPos.x, _endPos.y, _startPos.z);
         RefreshHealthBar();
     }
 
@@ -25,6 +27,6 @@ public class HealthDisplay : MonoBehaviour
 
     private void RefreshHealthBar()
     {
-        _healthIndicatorObj.transform.position = new Vector3(_healthIndicatorObj.transform.position.x, _startPos.y - ((_startPos.y - _endPos.y) * _healthHandler.GetHealthPercent()), _healthIndicatorObj.transform.position.z);
+        _healthIndicatorObj.transform.position = new Vector3(_healthIndicatorObj.transform.position.x, _startPos.y - (_startPos.y - ((_startPos.y - _endPos.y) * _healthHandler.GetHealthPercent())), _healthIndicatorObj.transform.position.z);
     }
 }
