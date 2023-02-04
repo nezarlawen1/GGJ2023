@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class HealthHandler : MonoBehaviour
 {
+    public static HealthHandler Instance;
+
     public event EventHandler OnHealthChanged;
     public event EventHandler OnDeath;
     [SerializeField] private int _maxHP;
@@ -19,6 +21,15 @@ public class HealthHandler : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         _currentHP = _maxHP;
         _healthDisplay.Setup(this);
         for (int i = 0; i < _portalSpawnerManager.spawnPortalList.Count; i++)
