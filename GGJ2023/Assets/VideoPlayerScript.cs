@@ -1,24 +1,33 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class VideoPlayerScript : MonoBehaviour
 {
-    public VideoPlayer videoPlayer;
     public RawImage rawImage;
+    public VideoPlayer videoPlayer;
+    public string sceneToLoad;
+    public bool switchSceneAfterVideoEnds;
 
     void Start()
     {
         videoPlayer.Prepare();
-        videoPlayer.playOnAwake = false;
-        videoPlayer.targetTexture = rawImage.texture as RenderTexture;
-        videoPlayer.loopPointReached += EndReached;
-        videoPlayer.Play();
+        videoPlayer.prepareCompleted += VideoPrepared;
     }
 
-    void EndReached(VideoPlayer vp)
+    void VideoPrepared(VideoPlayer vp)
     {
-        SceneManager.LoadScene("Game");
+        rawImage.texture = vp.texture;
+        videoPlayer.Play();
+        videoPlayer.loopPointReached += VideoEnded;
+    }
+
+    void VideoEnded(VideoPlayer vp)
+    {
+        if (switchSceneAfterVideoEnds)
+        {
+            SceneManager.LoadScene(sceneToLoad);
+        }
     }
 }
