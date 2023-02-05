@@ -264,6 +264,11 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: -0.38
       objectReference: {fileID: 0}
+    - target: {fileID: 9104321049619270266, guid: 9135c9c5efa102a4198eab73ddd66ec1,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9135c9c5efa102a4198eab73ddd66ec1, type: 3}
 --- !u!4 &8520789673663464597 stripped
