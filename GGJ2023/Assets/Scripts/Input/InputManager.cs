@@ -24,13 +24,16 @@ public class InputManager : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
 
-        player.Skip.performed += ctx => SceneManager.LoadScene("Game");
+        if (SceneManager.GetActiveScene().name == "IntroScene")
+        {
+            player.Skip.performed += ctx => SceneManager.LoadScene("Game");
+        }
     }
     private void Update()
     {
         /*if (GameManager.Instance.CurrentMaze == null)
         {*/
-            player.CycleKey.performed += ctx => CubeKey.Instance.NextCoreType();
+        player.CycleKey.performed += ctx => CubeKey.Instance.NextCoreType();
         //}
 
         player.SwapToScout.started += ctx =>
