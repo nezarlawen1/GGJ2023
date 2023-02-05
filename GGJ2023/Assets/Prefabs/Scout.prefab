@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosePortal: 0
+  DamageOnFault: 100
 --- !u!114 &2468607916666627468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +256,9 @@ MonoBehaviour:
   movementSpeed: 15
   Gravity: 0
   moveDirection: {x: 0, y: 0, z: 0}
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &2468607916666627469
 MonoBehaviour:
   m_ObjectHideFlags: 0

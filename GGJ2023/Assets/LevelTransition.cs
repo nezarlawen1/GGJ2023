@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class LevelTransition : MonoBehaviour
 {
-  
-   public void SceneChange()
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void SceneChange()
     {
         SceneManager.LoadScene("IntroScene");
     }

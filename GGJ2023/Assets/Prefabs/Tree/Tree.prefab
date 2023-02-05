@@ -215,7 +215,9 @@ MonoBehaviour:
   _startPos: {x: 0, y: 0, z: 0}
   _endPos: {x: 0, y: 0, z: 0}
   _gameOverTextPopup: {fileID: 0}
+  _lifeTextPopup: {fileID: 0}
   _appearTime: 2
+  _appearTime2: 15
 --- !u!1 &2941150518095742117
 GameObject:
   m_ObjectHideFlags: 0

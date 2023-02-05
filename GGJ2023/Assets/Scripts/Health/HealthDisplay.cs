@@ -12,11 +12,15 @@ public class HealthDisplay : MonoBehaviour
 
     private HealthHandler _healthHandler;
 
-    [SerializeField] private Image _gameOverTextPopup;
+    [SerializeField] private Image _gameOverTextPopup, _lifeTextPopup;
     [SerializeField] private float _appearTime;
+    [SerializeField] private float _appearTime2;
     private float _timer;
+    private float _timer2;
     private Color _color;
+    private Color _color2;
     private bool _gameOver;
+    private bool _lifeAppear;
 
 
     public void Setup(HealthHandler system)
@@ -28,8 +32,12 @@ public class HealthDisplay : MonoBehaviour
         RefreshHealthBar();
 
         _color = Color.white;
+        _color2 = Color.white;
         _color.a = 0;
+        _color2.a = 0;
         _gameOverTextPopup.color = _color;
+        _lifeTextPopup.color = _color2;
+        _lifeAppear = true;
         _healthHandler.OnDeath += _healthHandler_OnDeath;
     }
 
@@ -76,5 +84,26 @@ public class HealthDisplay : MonoBehaviour
             }
         }
 
+
+        if (_lifeAppear)
+        {
+            _timer2 += Time.deltaTime;
+            if (_timer2 <= _appearTime2)
+            {
+                _color2.a = Mathf.Lerp(_color.a, 1, 1f);
+                _lifeTextPopup.color = _color2;
+            }
+            else if (_timer2 > _appearTime2 && _timer2 <= _appearTime2 + 5)
+            {
+                _color2.a = Mathf.Lerp(_color.a, 0, 0.5f);
+                _lifeTextPopup.color = _color2;
+            }
+            else
+            {
+                _color2.a = 0;
+                _lifeTextPopup.color = _color2;
+                _lifeAppear = false;
+            }
+        }
     }
 }

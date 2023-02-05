@@ -106,13 +106,13 @@ public class PointerHolder : MonoBehaviour
                 _color2.a = Mathf.Lerp(_color2.a, 0, 0.1f);
                 _winTextPopup.color = _color2;
             }
-            else
-            {
-                _color2.a = 0;
-                _winTextPopup.color = _color2;
-                _donePopupWin = true;
-                SceneManager.LoadScene(0);
-            }
+            //else
+            //{
+            //    _color2.a = 0;
+            //    _winTextPopup.color = _color2;
+            //    _donePopupWin = true;
+            //    SceneManager.LoadScene(0);
+            //}
         }
     }
 }

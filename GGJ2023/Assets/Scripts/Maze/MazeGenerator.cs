@@ -31,6 +31,7 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private bool _withRoof = true;
     [SerializeField] private bool _createMaze = true;
     private bool _creatingMaze;
+    private bool _finishedMaze;
 
     [Header("Additional Generation")]
     [SerializeField] private CoreType _coreType;
@@ -105,33 +106,43 @@ public class MazeGenerator : MonoBehaviour
 
     public void SwitchVision(bool isDark)
     {
-        _darkVision = isDark;
-        _changedVision = true;
-        if (PlayerSpotLight != null)
+        if (!_finishedMaze)
         {
-            PlayerSpotLight.enabled = isDark;
-        }
-        if (isDark)
-        {
-            RenderSettings.skybox = null;
-        }
-        else
-        {
-            RenderSettings.skybox = _skyboxMaterial;
+            _darkVision = isDark;
+            _changedVision = true;
+            if (PlayerSpotLight != null)
+            {
+                PlayerSpotLight.enabled = isDark;
+            }
+            if (isDark)
+            {
+                RenderSettings.skybox = null;
+            }
+            else
+            {
+                RenderSettings.skybox = _skyboxMaterial;
+            }
         }
     }
 
     public void SetNodeColors()
     {
-        foreach (var node in _createdMazeNodes)
+        if (!_finishedMaze)
         {
-            node.SetMaterial(_darkVision);
+            foreach (var node in _createdMazeNodes)
+            {
+                node.SetMaterial(_darkVision);
+            }
+            if (_roofNode != null)
+            {
+                _roofNode.SetMaterial(_darkVision);
+            }
+            _changedVision = false;
+            if (_coreRef.GetComponent<Core>().Purified)
+            {
+                _finishedMaze = true;
+            }
         }
-        if (_roofNode != null)
-        {
-            _roofNode.SetMaterial(_darkVision);
-        }
-        _changedVision = false;
     }
 
     private void GenerateMazeInstantaneously(Vector2Int size)
@@ -143,7 +154,7 @@ public class MazeGenerator : MonoBehaviour
         {
             for (int y = 0; y < size.y; y++)
             {
-                Vector3 nodePos = new Vector3(x * _mazeNodePrefab.transform.localScale.x + transform.position.x /* - (size.x / 2)*/, 0, y * _mazeNodePrefab.transform.localScale.y + transform.position.z /* - (size.x / 2)*/);
+                Vector3 nodePos = new Vector3(x * _mazeNodePrefab.transform.localScale.x + transform.position.x /* - (size.x / 2)*/, transform.position.y, y * _mazeNodePrefab.transform.localScale.y + transform.position.z /* - (size.x / 2)*/);
                 MazeNode newNode = Instantiate(_mazeNodePrefab, nodePos, Quaternion.identity, _nodesHolder);
                 newNode.SetPosOnMatrix(x, y);
                 nodes.Add(newNode);
@@ -295,7 +306,7 @@ public class MazeGenerator : MonoBehaviour
         {
             for (int y = 0; y < size.y; y++)
             {
-                Vector3 nodePos = new Vector3(x * _mazeNodePrefab.transform.localScale.x /* - (size.x / 2)*/, 0, y * _mazeNodePrefab.transform.localScale.y /* - (size.x / 2)*/);
+                Vector3 nodePos = new Vector3(x * _mazeNodePrefab.transform.localScale.x /* - (size.x / 2)*/, transform.position.y, y * _mazeNodePrefab.transform.localScale.y /* - (size.x / 2)*/);
                 MazeNode newNode = Instantiate(_mazeNodePrefab, nodePos, Quaternion.identity, _nodesHolder);
                 newNode.SetPosOnMatrix(x, y);
                 nodes.Add(newNode);
