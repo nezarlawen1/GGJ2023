@@ -14,6 +14,7 @@ public class PointerHolder : MonoBehaviour
     [SerializeField] private Image _portalsTextPopup, _winTextPopup;
 
     [SerializeField] private float _appearTime;
+    [SerializeField] private float _appearTimeWin;
     private float _timer;
     private bool _donePopupPortal;
     private bool _donePopupWin;
@@ -89,6 +90,7 @@ public class PointerHolder : MonoBehaviour
 
             if (counter == _spawnerManager.spawnPortalList.Count)
             {
+                _timer = 0;
                 _activatedWin = true;
             }
         }
@@ -96,23 +98,23 @@ public class PointerHolder : MonoBehaviour
         if (_activatedWin && !_donePopupWin)
         {
             _timer += Time.deltaTime;
-            if (_timer <= _appearTime)
+            if (_timer <= _appearTimeWin)
             {
                 _color2.a = Mathf.Lerp(_color2.a, 1, 0.1f);
                 _winTextPopup.color = _color2;
             }
-            else if (_timer > _appearTime && _timer <= _appearTime * 2)
+            else if (_timer > _appearTimeWin && _timer <= _appearTimeWin * 2)
             {
                 _color2.a = Mathf.Lerp(_color2.a, 0, 0.1f);
                 _winTextPopup.color = _color2;
             }
-            //else
-            //{
-            //    _color2.a = 0;
-            //    _winTextPopup.color = _color2;
-            //    _donePopupWin = true;
-            //    SceneManager.LoadScene(0);
-            //}
+            else
+            {
+                _color2.a = 0;
+                _winTextPopup.color = _color2;
+                _donePopupWin = true;
+                SceneManager.LoadScene(0);
+            }
         }
     }
 }

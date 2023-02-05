@@ -51,7 +51,7 @@ public class CubeKey : MonoBehaviour
         switch (_coreType)
         {
             case CoreType.Austri:
-                _holder.localRotation = Quaternion.Euler( Vector3.Lerp(_holder.localRotation.eulerAngles, Vector3.zero,0.01f));
+                _holder.localRotation = Quaternion.Euler( Vector3.Lerp(_holder.localRotation.eulerAngles, Vector3.zero,0.2f));
                 //_holder.localRotation = Quaternion.Euler(0f, 0f, 0f);
                 break;
             case CoreType.Norori:

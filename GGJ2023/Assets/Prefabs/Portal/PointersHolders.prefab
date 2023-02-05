@@ -53,8 +53,11 @@ MonoBehaviour:
   - {fileID: 7340894344832631239}
   - {fileID: 7340894345410066990}
   - {fileID: 7340894344199630186}
-  _textPopup: {fileID: 0}
+  _spawnerManager: {fileID: 0}
+  _portalsTextPopup: {fileID: 0}
+  _winTextPopup: {fileID: 0}
   _appearTime: 2
+  _appearTimeWin: 5
 --- !u!1001 &3674388794814861507
 PrefabInstance:
   m_ObjectHideFlags: 0
