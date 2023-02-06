@@ -35,6 +35,7 @@ public class PortalTeleporter : MonoBehaviour
     private void Teleport()
     {
         player.transform.position = exitPoint.transform.position;
+        player.transform.rotation = exitPoint.transform.rotation;
         ControllersSwapManager.Instance.PlayerCanTeleport = false;
         player = null;
         

@@ -700,8 +700,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CamHolder: {fileID: 7859231429895097699}
   cam: {fileID: 7859231428406600956}
-  xSensitivity: 15
-  ySensitivity: 15
+  xSensitivity: 10
+  ySensitivity: 10
 --- !u!82 &98731413633637332
 AudioSource:
   m_ObjectHideFlags: 0
