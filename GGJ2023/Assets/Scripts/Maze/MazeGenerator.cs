@@ -28,6 +28,7 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private bool _randStart;
     [SerializeField] private bool _randEnd;
     [SerializeField] private bool _showDrawing;
+    [SerializeField] private bool _showQuarters;
     [SerializeField] private bool _withRoof = true;
     [SerializeField] private bool _createMaze = true;
     private bool _creatingMaze;
@@ -463,7 +464,7 @@ public class MazeGenerator : MonoBehaviour
             if (_randEnd)
             {
                 int nodeIndex = Random.Range(0, _createdMazeNodes.Count);
-                while (CheckArea(nodeIndex) == _startSpawnArea)
+                while (CheckArea(nodeIndex) == _startSpawnArea || CheckArea(nodeIndex) == _startSpawnArea + 1 || CheckArea(nodeIndex) == _startSpawnArea - 1)
                 {
                     nodeIndex = Random.Range(0, _createdMazeNodes.Count);
                 }
@@ -497,6 +498,14 @@ public class MazeGenerator : MonoBehaviour
             Vector3 tempPos = new Vector3(_mazeSize.x * 2 + transform.position.x, _mazeSize.x + transform.position.y, _mazeSize.y * 2 + transform.position.z);
             _roofNode = Instantiate(_mazeNodePrefab, tempPos, Quaternion.identity, _nodesHolder);
             _roofNode.transform.localScale = new Vector3(_mazeSize.x * _mazeSize.x, _mazeNodePrefab.transform.localScale.y, _mazeSize.y * _mazeSize.y);
+        }
+
+        if (_showQuarters)
+        {
+            for (int i = 0; i < _createdMazeNodes.Count; i++)
+            {
+                _createdMazeNodes[i].SetQuarter(CheckArea(i));
+            }
         }
     }
 

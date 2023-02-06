@@ -43,6 +43,27 @@ public class MazeNode : MonoBehaviour
         }
     }
 
+    public void SetQuarter(SpawnArea spawnArea)
+    {
+        switch (spawnArea)
+        {
+            case SpawnArea.FirstQuarter:
+                _floormesh.material.color = Color.green;
+                break;
+            case SpawnArea.SecondQuarter:
+                _floormesh.material.color = Color.cyan;
+                break;
+            case SpawnArea.ThirdQuarter:
+                _floormesh.material.color = Color.red;
+                break;
+            case SpawnArea.FourthQuarter:
+                _floormesh.material.color = Color.magenta;
+                break;
+            default:
+                break;
+        }
+    }
+
     public void SetPosOnMatrix(int x, int y)
     {
         _posCords.x = x;
